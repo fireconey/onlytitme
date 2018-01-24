@@ -1,0 +1,71 @@
+{% load static %}
+{% csrf_token %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{#	<meta http-equiv="refresh" content="2000">#}
+	<meta charset="UTF-8">
+	<script type="text/javascript" src={%static "js/local.js"%}></script>
+	<script type="text/javascript" src={% static "js/regist.js" %}></script>
+	<link rel="stylesheet" href={% static "style/regist.css" %}>
+	<title>reg</title>
+</head>
+<body>
+	<div id="container">
+		<form action="/rg/"  method="post" enctype="multipart/form-data">
+			<input type="file" id="file" name="file" value="">
+		</form>
+		<img src="{{ im }}" id="photo" alt="头像">
+		<input  type="button" id="changephoto" value="修改">
+		<div  id="inner">
+			<div id="back">
+				<div id="lef">
+					<label for="usr">*输入账号
+						<input type="text" id="usr" name="usr">
+					</label>
+					<label for="passwd">*输入密码
+						<input type="text" id="passwd" name="passwd">
+					</label>
+					<label for="passwd2">*验证密码
+						<input type="text" id="passwd2">
+					</label>
+					*输入性别
+					<select id="sex">
+						<option value=0> 男</option>
+						<option value=1> 女</option>
+					</select>
+
+					<input type="button" value="确定" id="yes">
+				</div>
+				
+				<div id="rit">
+					<label for="birth">*出生日期
+						<input type="date" id="birth">
+					</label>
+					<label for="wx">*微信号码
+						<input type="text" id="wx">
+					</label>
+					<label for="phone">&nbsp电话号码
+						<input type="text" id="phone">
+					</label>
+					<label for="loc">*地理位置
+						<div type="text" id="loc">
+							<select name="province6" class="loc">
+							</select>
+							<select name="city6" class="loc">
+							</select>
+							<select name="area6" class="loc">
+							</select>
+                            <input type="text" id="group" >
+						</div>
+					</label>
+
+					<input type="button" value="取消" id="cancel">
+					
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,183 @@
+*{
+	margin:0;
+	padding:0;
+	box-sizing: border-box;
+}
+body{
+	/*background: #FFF;*/
+	background-image:url("../img/background/ho.jpg");
+
+}
+
+#container{
+	width:100%;
+	height:400px; 
+	background:none;
+	min-width:850px;
+
+}
+#container #file{
+	display: none;
+}
+#container img{
+	display: block;
+	height:20%;
+	border-radius: 50%; 
+	margin:auto;
+
+}
+#container #changephoto{
+	display:none;
+	background: red;
+	border:none;
+	height:20%;
+	margin: auto;
+	text-align: center;
+	color:#FFF;
+	border-radius:50%;
+}
+
+#inner{
+	width:100%; 
+	height:85%;
+	/*background:#FFF;  */
+	background:rgba(39,123,69,0.95);
+	position:relative; 
+
+}
+
+#inner #back{
+	margin: auto;
+	clear: both;
+	width:65%; 
+	max-width:650px;
+	height:100%; 
+	/*background:red;*/
+	clear:both;
+
+}
+
+#back #leferr{
+	background:yellow;
+	float: left;
+	width:20%;
+	   
+	height: 100%;
+}
+
+#lef{
+	left:16%;
+	width:40%; 
+	height:100%; 
+	/*background: #FFF;*/
+	float:left;
+	color:#FFF; 
+	padding-top:3%; 
+
+}
+#lef input{
+	color:yellow;
+	width:100%; 
+	height:10%; 
+	background: none;
+	border: 1.5px dashed #FFF;
+	/*margin-top:6%; */
+	margin-left:1%; 
+	font-size:1em; 
+	margin-bottom:4%; 
+}
+#lef #sex{
+	background: none;
+	width:100%;
+	height:10%; 
+	border: 1.5px dashed #FFF; 
+	-webkit-appearance: none;
+	border-radius: 0px;
+	color:yellow;
+	margin-left:1%;
+	font-size:1.2em; 
+
+}
+
+#lef #yes{
+	width:100%;
+	height:10%; 
+	margin-left:0!important;  
+	margin-top:8%;
+	line-height:150%;
+	border:1px solid #FFF;
+	background:#FFF;  
+	margin-left:1%!important;  
+	color:black;
+}
+
+
+#rit{
+	padding-top:3%; 
+	float:right;
+	width:40%;
+	height:100%; 
+	/*background: #FFF;*/
+	color:#FFF; 
+}
+#rit input{
+	color:yellow;
+	width:100%; 
+	height:10%; 
+	background: none;
+	font-size:1.1em; 
+	border: 1.5px dashed #FFF;
+	margin-bottom:4%; 
+
+}
+#rit input:focus{
+	
+}
+#rit #loc{
+	padding-top:0.5%; 
+	color:yellow;
+	width:100%; 
+	height:9.8%; 
+	background: none;
+	border: 1.5px dashed #FFF;
+	margin-bottom:4%; 
+
+}
+
+#loc .loc{
+    margin-left:0!important;
+	width: 23%;
+    background: none;
+	height:100%; 
+	border-style: none;
+	color:yellow;
+	
+}
+#rit #group{
+	width: 24%;
+	height: 100%;
+	border: none;
+	border-left:1px  dashed  #FFF;
+
+}
+#rit #cancel{
+	width:100%;
+	height:10%; 
+	margin-left:0!important;  
+	margin-top:5%;
+	padding:0;
+	line-height:150%;
+	color:black;
+	border:1px solid #FFF;
+	background: #fff;   
+}
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,230 @@
+*{
+	margin:0;
+	padding:0;
+	box-sizing: border-box;
+
+}
+
+body{
+	background-color: rgba(211,211,211,0.5);
+	
+}
+#inner{
+	margin:auto;
+	width:80%; 
+	min-width:850px; 
+}
+
+#header{
+	width:100%;
+	height:16.4%;
+	margin-bottom:1%;
+	box-shadow: 5px 5px 3px #8F8F8F;  
+	
+}
+#ad{
+	height:80%;
+	width:100%;
+	background:yellow;
+}
+#ad img{
+	height: 100%;
+	width: 100%;
+}
+#topbar{
+	height:20%;
+	width:100%;
+	background:green;
+	position: relative;
+}
+#topbar img{
+	height:100%;
+	border-radius:50%;
+	float:left;
+	margin-left:4%;
+}
+#topbar #name{
+
+	margin-top:2.5%;
+	margin-left: 1%;
+	color:#FFF;
+	float:left;
+}
+
+#topbar ul{
+	height:60%;
+	margin: auto;
+	margin-top:2%;
+	float: left;
+}
+
+#topbar ul li{
+	height:100%;
+	list-style:none;
+	margin-left:100px;
+	float:left;
+}
+
+#topbar ul li a{
+	display: block;
+	text-decoration:none;
+	font-size: 17px;
+	color:#FFF;
+}
+
+#topbar input[name="mark"]{
+	display: none;
+	background: red;
+}
+
+
+/************************以下是详细内容******/
+#inner #sell{
+	height:39.34%; 
+	width:100%; 
+	background: #FFF;
+	padding-top: 1%;
+	box-shadow: 5px 5px 3px #8F8F8F;
+	border:0.5px solid #ccc;
+}
+#sell label{
+	display: block;
+	float:left;
+	height:8%; 
+	width:50%;
+	font-size: 1.1em;
+	padding-left: 1%;
+	text-align: center;
+	margin:auto;
+	/*color:#FFF;*/
+	/*background: green;*/
+}
+
+#sell label input{
+	border: 1.5px dashed green;
+	width:55%;
+	height:70%; 
+	margin-top:1%!important; 
+	margin:auto;
+}
+#sell #detalab{
+	clear:both;
+	display: block;
+	width: 100%;
+	height:9%; 
+	margin: 0;
+	display: block;
+	font-size: 1.3em;
+	background:green;
+	color:#FFF;
+	padding-top:1%; 
+}
+#sell  #detail{
+	clear: both;
+	height:83%;
+	width:100%;
+	overflow-y: auto;
+	/*background: green;*/
+	margin:auto;
+	border-style:none;
+	outline-style: none;
+
+}
+
+
+
+#inner #buy{
+
+	margin-top:1%; 
+	height: 39.34%;
+	width: 100%;
+	background: #FFF;
+	box-shadow: 5px 5px 3px #8F8F8F;
+	border:0.5px solid #ccc;
+
+}
+
+#buy #need{
+	padding-top: 1%;
+	width: 100%;
+	height:8%; 
+	font-size: 1.3em;
+	text-align: center;
+	background: green;
+	color:#FFF;
+}
+#buy #leftinner{
+	margin-top:0.3%; 
+	/*border:1px solid green;*/
+	height:91%;
+	width: 50%;
+	float: left;
+	margin-left: 0.3%;
+}
+#leftinner #spec{
+	color:green;
+	width: 100%;
+	height:5%; 
+	margin-top:1.5%;
+
+}
+#spec #title{
+	width:40%;
+	height:100%;  
+	border:1px dashed green;
+}
+#leftinner #other1{
+	height: 100%;
+	width: 17.5%;
+	border:1px dashed green;
+}
+#leftinner #other2{
+	height: 100%;
+	width: 10%;
+	border:1px dashed green;
+}
+
+#leftinner #add{
+	background:green;
+	width:100%;
+	height:7%; 
+	font-size:2em; 
+	margin:auto;
+	margin-top:2.5%;
+	color:#FFF;
+	border-style: none;
+	text-align: center;
+}
+#leftinner #add:active{
+	
+    background:#FFF;
+    color:green;	 
+
+}
+#buy #deta{
+	height: 91%;
+	width: 49%;
+	float: right;
+	overflow-y: visible;
+	margin-top:0.3%;
+	margin-right:0.2%; 
+	border: 1px solid green;
+	overflow-y: auto;
+	outline-style: none;
+
+
+}
+
+
+
+#footer{
+	clear:both;
+	margin-top:1%; 
+	margin-bottom:10px; 
+	height:13.12%;
+	width:100%;
+	background:green;
+	color:#FFF;
+	box-shadow: 5px 5px 3px #8F8F8F; 
+
+}

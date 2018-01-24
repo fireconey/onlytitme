@@ -1,0 +1,164 @@
+*{
+	padding:0;
+	margin:0;
+	box-sizing: border-box;
+}
+body{
+	background-color: rgba(211,211,211,0.5);
+}
+#container{
+	margin:auto;
+	min-width:850px;    /*4719*/
+	width: 80%;
+	/*background: yellow;*/
+}
+#header{
+	height:5.297%;
+}
+#inner{
+	width:100%;
+	height: 89.107%;  /*4205*/
+	box-shadow: 5px 5px 3px #8F8F8F;
+	border:0.5px solid #CCC;
+	/*background: red;*/
+}
+.ul{
+	height:4.756%; /*6192*/
+	width: 100%;
+	text-decoration: none;
+	list-style: none;
+	margin-bottom:1.2%;
+
+}
+.ul .left{
+	width:24.117%;
+	height:100%; 
+	background:#FFF; 
+	float: left;
+	margin-right: 1.17%;
+	border:1px solid #CCC;
+}
+.ul .right{
+	width:24.1176%;
+	height: 100%;
+	background: #FFF;
+	float:right;
+	border:1px solid #CCC;
+}
+
+
+.ul .gsphoto{
+	display: block;
+	width:100%;
+	height:80%; 
+    margin:auto;
+}
+
+.ul .hphoto{
+	float:left;
+	padding:0;
+	height:18%;
+	background: red;
+	border-radius: 50%;
+	margin-top:2%; 
+}
+
+.ul .title{
+	color:#FFF;
+	width:100%; 
+	height:10%; 
+	background:green;
+	color:yellow;
+}
+
+.ul .price{
+	text-align: center;
+	width:100%; 
+	height:10%; 
+	color:yellow;
+	background:green;
+}
+
+
+
+
+/************************以下是按钮************/
+#inner #button{
+	position: fixed;
+    bottom:10px;
+    left:27.5%;
+	height:40px; 
+	width:45%; 
+	background:#FFF;
+	font-size:1.2em;
+	padding-top:0.6%;
+	padding-left:1%;
+	padding-right:1%;  
+	color:blue;
+	border:1.5px solid #CCC;
+}
+
+#button #pre{
+	float:left;
+	background:#CCC;
+	height:85%; 
+	width:20%; 
+	text-align:center;
+	cursor:pointer;
+	 
+}
+#button #number{
+	background:#CCC;
+    height:85%; 
+	width:56%; 
+	margin-left:1%; 
+	margin:auto;
+    position: relative;
+    
+}
+#number input{
+	background:#CCC; 
+	width:24%;
+	height:85%;
+	border-style: none; 
+	margin:auto; 
+	text-align: center;
+	color:red;
+	/*border: 1px solid black;*/
+}
+#number #all{
+	position: absolute;
+	width:26%; 
+    float:left;
+    left:45%;
+	top:14%;
+	color:blue;
+}
+#number #yes{
+	color:#FFF;
+	position: absolute;
+	height:100%;
+	width:25%; 
+	top:0%;
+	left:72%;
+	border: none;
+    /*border:1px dashed black; */
+    background:green;
+	cursor:pointer;
+}
+
+#button #next{
+	width:20%; 
+	height: 85%;
+	float:right;
+	background:#CCC;
+	color:blue;
+	text-align: center;
+	cursor:pointer;
+}
+
+
+#footer{
+	height:4.238%;
+	margin-top:0px; 
+}

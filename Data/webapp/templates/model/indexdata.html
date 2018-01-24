@@ -1,0 +1,43 @@
+{%load static%}
+<link rel="stylesheet" href={%static "model/style/indexdata.css"%}>
+<section   class="box">
+<div class="tag">
+    <a href="#">石板姐------>>></a>
+    <input type="button" value="修改" class="changeyes">
+    <input type="text" class="changeinput">
+</div>
+
+
+	<div class="data">
+		<ul class="left">
+          {%for i in range%}
+			<li class="li">
+				<img src="static/img/loading.jpg" alt="" class="photo" >
+				<p class="name">田华</p>
+				<div class="text">44</div>
+			</li>
+			{%endfor%}
+		</ul>
+		<ul class="right">
+			{%for i in range%}
+			<li class="li">
+				<img src="static/img/loading.jpg" alt="" class="photo">
+				<p class="name">田华</p>
+				<div class="text">44</div>
+			</li>
+			{%endfor%}
+
+		</ul>
+		
+		<ul class="middle">
+			{%for i in range%}
+			<li class="li">
+				<img src="static/img/loading.jpg" alt="" class="photo">
+				<p class="name">田华</p>
+				<div class="text">44</div>
+			</li>
+			{%endfor%}
+		</ul>
+	</div>
+	
+</section>

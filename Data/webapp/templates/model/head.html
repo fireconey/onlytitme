@@ -1,0 +1,25 @@
+{% load static %}
+<script type="text/javascript" src={% static "model/js/head.js"%}>
+</script>
+<link rel="stylesheet" href={%static "model/style/head.css"%}>
+<header id="header">
+      <div id="ad">
+          <img src={% static "/img/banner/timg.jpg"%}>
+      </div>
+      <form action="/topbar"  method="post" id="topbar">
+              {% csrf_token %}
+              <img src={{ initimg}}  alt="登陆的头像" id="headp">
+            <div id="name">{{ initusr }}</div>
+            <ul id="list">
+              <li><a href="#">首页</a></li>
+              <li><a href="#">消息</a></li>
+              <li><a href="#">物品</a></li>
+              <li><a href="#">{{ ob }}</a></li>
+              <li><a href="#">{{ rg }}</a></li>
+            </ul>
+          <input type="submit" name="mark" value="img">
+          </form>
+</header>
+
+
+

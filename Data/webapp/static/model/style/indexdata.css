@@ -1,0 +1,126 @@
+*{
+	margin:0;
+	padding:0;
+	box-sizing: border-box;
+}
+.box{
+	display: block; 
+	width: 100%;
+	/*height:32.407%;*/
+	height:24.01537%;
+	background:#FFF; 
+	margin-top:20px;
+	/*border:1px solid #ccc;*/
+	/*box-shadow: 5px 8px 3px #8F8F8F; */
+	background-color: #FFF;
+
+}
+.box .tag{
+	background:green;
+	width:100%;
+	height:10%;
+	padding-top:1%;
+	margin-bottom:2.5%;
+}
+.tag a{
+	font-size: 1.2em;
+	color:yellow;
+	text-decoration: none;
+}
+.tag .changeyes{
+	background:#FFF;
+	border-style:none;
+	margin-right:5%;
+	float: right;
+	height: 70%;
+	width:10%;
+	border-radius:20px;
+	margin-top: 0.5%;
+
+
+}
+.tag .changeinput{
+	border-style:none;
+	float: right;
+	margin-right:1%;
+	width:33%;
+	height: 70%;
+	border-radius:20px;
+		margin-top: 0.5%;
+}
+
+.data{
+	
+	height: 80%;
+	width:100%; 
+	list-style: none;
+	/*padding-top:10px; */
+	/*background: yellow;*/
+}
+
+.data .left{
+	width:32.5%;
+	height:100%;
+	float:left;
+	list-style: none;
+	/*background: red; */
+}
+
+.data .middle{
+   /*clear: both;*/
+	width:32.5%;
+	height: 100%;
+	margin:auto;
+	list-style: none;
+	/*margin-left:1%; */
+	/*background: red */
+}
+
+.data .right{
+	width: 32.5%;
+	height:100%;
+	float:right;
+	list-style: none;
+	/*background: red; */
+	position: relative;
+}
+
+
+.data .li{
+	position: relative;
+	display: block;
+	background: green;
+	height:18%;
+	color:#FFF;
+	/*color:blue;*/
+	margin-bottom:15px;
+}
+.li img{
+	float:left;
+	/*display: block;*/
+	height:100%;
+	width:50px;
+	background:green;
+	border-radius:50%;  
+	
+}
+
+
+
+.li .name{
+	position: absolute;
+	top:50%;
+	left:8px;
+	color:blue;
+	width:13%;
+	background:none;
+	text-align: center;
+	overflow:hidden;
+
+}
+.li .text{
+	overflow:hidden;
+	/*background: red;*/
+	height: 100%;
+}
+

@@ -1,0 +1,39 @@
+{%load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="refresh" content="200">
+	<title>Document</title>
+	<script type="text/javascript" src={%static "js/jquery.js"%}></script>
+	<script type="text/javascript" src={%static "js/local.js"%}></script>
+	<script type="text/javascript" src={%static "js/newsbackstage.js"%}></script>
+	<link rel="stylesheet" href={% static "style/newsbackstage.css"%}>
+</head>
+<body>
+	<div id="container">
+		<div id="inner">
+			<div id="title" contenteditable="true">
+				我要去吉首
+			</div>
+			<div contenteditable="true" id="content">
+				fsdf
+			</div>
+			<div type="text" id="loc">
+				<select name="province6" class="loc">
+				</select>
+				<select name="city6" class="loc">
+				</select>
+				<select name="area6" class="loc">
+				</select>
+				<input type="text" id="group" >
+			</div>
+			<div id="button">
+				<input type="submit" value="发布" id="yes" >
+				<input type="button" value="取消" id="cancel">
+			</div>
+			
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,69 @@
+{%load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+{#	<meta http-equiv='refresh' content="3">#}
+	<title>goodsbackstage</title>
+	<link rel="stylesheet" type="text/css" href={% static "style/goodsbackstage.css"%}>
+	<script type="text/javascript" src={% static "js/goodsbackstage.js" %}></script>
+</head>
+<body>
+	<div id="inner">
+		<header id="header">
+      <div id="ad"><img src={%  static "img/banner/timg.jpg"%}></div>
+      <form action="/topbar"  method="post" id="topbar">
+          {% csrf_token %}
+          <img src={% static "img/loading.jpg"%} alt="登陆的头像" id="headp">
+        <div id="name">姓名</div>
+        <ul id="list">
+          <li><a href="#">首页</a></li>
+					<li><a href="#">消息</a></li>
+					<li><a href="#">物品</a></li>
+					<li><a href="#">{{ob}}</a></li>
+					<li><a href="#">{{ rg }}</a></li>
+        </ul>
+          <input type="submit" name="mark" value="img">
+      </form>
+    </header>
+
+    <section id="sell">
+    	<label for="title">请输入物品名称：
+    		<input type="text" id="title">
+    	</label>
+    	<label for="call">请输入联系方式:
+    		<input  type="text" id="call">
+    	</label>
+    	<label for="detail" id="detalab">
+       详述： 
+     </label>
+     <div id="detail" contenteditable="true">
+       1
+     </div>
+   </section>
+
+   <section id="buy">
+    <div id="need">需求:</div>
+    <div id="leftinner">
+      <div id="spec">
+        物品名称<input type="text" id="title">
+        数量<input type="text" id="other1">
+        单位<input type="text" id="other2">
+      </div>
+      <input type="button" id="add" value="+">
+    </div>
+    <div contenteditable="true" id="deta">
+      11
+    </div>
+  </section>
+
+  <footer id="footer">
+    <div>电话：13957613802</div>
+    <div>版权@13957613802</div>
+  </footer>
+</br>
+
+</div>
+
+</body>
+</html>

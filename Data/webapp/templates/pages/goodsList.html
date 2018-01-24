@@ -1,0 +1,82 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+{#	<meta http-equiv="refresh" content="200">#}
+    <script type="text/javascript" src={% static "js/jquery.js" %}></script>
+	<script type="text/javascript" src={% static "js/goodsList.js"%}></script>
+    <link rel="stylesheet" href={% static "style/goodsList.css"%}>
+	<title>Document</title>
+</head>
+<body>
+	<div id="container">
+		{%include "model/head.html"%}
+		<div id="inner">
+			{% for i in range %}
+			<ul class="ul">
+				<li class="left">
+					<img src={%static "img/background/b.jpg"%} alt="图片" class="gsphoto">
+					<img src={%static "img/loading.jpg" %} alt="" class="hphoto">
+					<div class="title">
+						水瓶我的部落及的发发发打发
+					</div>
+					<div class="price">
+						987￥
+					</div>
+
+				</li>
+				<li class="left">
+					<img src={%static "img/background/b.jpg"%} alt="图片" class="gsphoto">
+					<img src={%static "img/loading.jpg" %} alt="" class="hphoto">
+					<div class="title">
+						水瓶我的部落及的发发发打发
+					</div>
+					<div class="price">
+						987￥
+					</div>
+
+				</li>
+				<li class="left">
+					<img src={%static "img/background/b.jpg"%} alt="图片" class="gsphoto">
+					<img src={%static "img/loading.jpg" %} alt="" class="hphoto">
+					<div class="title">
+						right1
+					</div>
+					<div class="price">
+						987￥
+					</div>
+
+				</li>
+				<li class="right">
+					<img src={%static "img/background/b.jpg"%} alt="图片" class="gsphoto">
+					<img src={%static "img/loading.jpg" %} alt="" class="hphoto">
+					<div class="title">
+						right
+					</div>
+					<div class="price">
+						987￥
+					</div>
+				</li>
+			</ul>
+			{%endfor%}
+			<div id="button">
+				<div id="pre">
+					上一页
+				</div>
+				<div id="next">
+					下一页
+				</div>
+				<div id="number">
+					第<input type="text"  value="1"  id="ipt">页/
+					<input type="button" value="确定" id="yes">
+					<div id="all">
+						{{ all }}
+					</div>
+				</div>
+			</div>
+		</div>
+		{%include "model/footer.html"%}
+	</div>
+</body>
+</html>

@@ -1,0 +1,85 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+{#	<meta http-equiv="refresh" content="2000">#}
+	<title>goodstrade</title>
+	<script type="text/javascript" src={% static "js/jquery.js"%}></script>
+	<link rel="stylesheet" href={% static "style/goods.css" %}>
+	<script type="text/javascript" src={% static "js/goods.js" %}></script>
+</head>
+<body>
+	<div id="inner">
+		<header id="header">
+			<div id="ad"><img src={%  static "img/banner/timg.jpg"%}></div>
+			<form action="/topbar" method="post" id="topbar">
+                {% csrf_token %}
+                <img src={% static "img/loading.jpg"%} alt="登陆的头像" id="headp">
+				<div id="name">姓名</div>
+				<ul id="list">
+					<li><a href="#">首页</a></li>
+					<li><a href="#">消息</a></li>
+					<li><a href="#">物品</a></li>
+					<li><a href="#">{{ob}}</a></li>
+					<li><a href="#">{{ rg }}</a></li>
+				</ul>
+                <input type="submit" name="mark" value="img">
+			</form>
+		</header>
+		<section  id="content">
+			<div id="sell">
+
+				<div id="title">
+					标题
+				</div>
+				<div id="usrinfo">
+					<div id="img">
+						<img src={% static "{{img}}"%} id="hphoto">
+						<div id="name">{{name}}</div>
+						<div id="eva">
+							<div id="good" class="le">好评{{good}}</div>
+							<div id="bad"  class="le">差评{{bad}}</div>
+							<div id="xy"   class="le">信用度{{xinyong}}</div>
+						</div>
+						
+					</div>
+					<div id="calldata">{{phone}}</div>
+				</div>
+
+			</div>
+			<div id="buy">
+				<div id="title">
+					需求
+				</div>
+				<div id="th">
+					{{price}}
+				</div>
+				<div id="detail">
+					{{needintro}}
+				</div>
+			</div>
+		</section>
+			<section id="explain">
+				展示用的
+				{{content}}
+				<br>
+				<br>
+				<br><br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+			</section>
+		<footer id="footer">
+			<div>电话：13957613802</div>
+			<div>版权@13957613802</div>
+		</footer>
+	</div>
+</body>
+</html>

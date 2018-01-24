@@ -1,0 +1,61 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+{#	<meta http-equiv="refresh" content="2">#}
+	<title>eval</title>
+	<link rel="stylesheet" href={%static "style/eval.css"%}>
+	<script type="text/javascript" src={%static "js/eval.js"%}></script>
+</head>
+<body>
+	<div id="inner">
+		<header id="header">
+			<div id="ad"><img src={% static "/img/banner/timg.jpg"%}></div>
+			<form action="/topbar" method="post" id="topbar">
+                {% csrf_token %}
+                <img src={% static "img/loading.jpg"%} alt="登陆的头像" id="headp">
+				<div id="name">姓名</div>
+				<ul id="list">
+					<li><a href="#">首页</a></li>
+					<li><a href="#">消息</a></li>
+					<li><a href="#">物品</a></li>
+					<li><a href="#">{{ob}}</a></li>
+					<li><a href="#">{{ rg }}</a></li>
+				</ul>
+                <input type="submit" name="mark" value="img">
+			</form>
+		</header>
+		<section id="content">
+			<div id="centerbox">
+			<div id="img"><img src={%static "img/loading.jpg"%} alt="头像"></div>
+			<div id="name">田华</div>
+			<div id="good">好评:1212</div>
+			<div id="middle">中评：121</div>
+			<div id="bad">差评：2323</div>
+			<div id="xy">信用度：1212</div>
+			<input type="button"  value="好评">
+			<input type="button"  value="中评">
+			<input type="button"  value="差评">
+			<div id="evalcontent">
+				哈哈哈
+			</div>
+			<div id="pre">
+				<<--上一页
+			</div>
+			<div id="page">
+				第8页
+			</div>
+			<div id="next">
+				下一页-->>
+			</div>
+			</div>
+		</section>
+
+		<footer id="footer">
+			<div>电话：13957613802</div>
+			<div>版权@13957613802</div>
+		</footer>
+	</div>
+</body>
+</html>
