@@ -118,7 +118,7 @@ class WebappNews(models.Model):
     title = models.CharField(max_length=20, blank=True, null=True)
     content = models.CharField(max_length=100)
     loc = models.CharField(max_length=30)
-    flag = models.CharField(max_length=10)
+    flag=models.IntegerField()
     usr = models.ForeignKey('WebappUsr', models.DO_NOTHING, db_column='usr')
 
 
@@ -154,5 +154,5 @@ class WebappUsr(models.Model):
 class eval(models.Model):
     id=models.IntegerField(primary_key=True)
     usr=models.ForeignKey("WebappUsr",models.DO_NOTHING,db_column="usr")
-    good=models.IntegerField(max_length=100)
-    bad=models.IntegerField(max_length=100)
+    good=models.IntegerField()
+    bad=models.IntegerField()

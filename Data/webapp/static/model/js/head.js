@@ -1,53 +1,82 @@
 function  head(){
 	img();
-	topbar();
+	bar()
 
 }
 function img(){
 	var ob=document.getElementsByName("mark")[0];
 	var img=document.getElementById("headp");
-	    // img.style.width=img.offsetHeight+"px"
+	    img.style.width=img.offsetHeight+"px"
 	img.onclick=function(){
 		ob.value="img";
 		ob.click();
 	}
 }
 
+function bar(){
 
-function topbar() {
-	var ul=document.getElementById("list");
-	var mark=document.getElementsByName("mark")[0]
-    var ch=ul.children
-	var index=["index","newsList","goodsDetail","loading","regist"]
-	ob0=ch[0]
-	ob1=ch[1]
-	ob2=ch[2]
-	ob3=ch[3]
-	ob4=ch[4]
-	var flag=ul.children[3].innerText.replace(/\s+/g,"")
-		if(flag=="退出")
-		{
-		  index[3]="quite"
-		}
+	var ob=$("#list").findchild("li")
+	var head=$("#headp").getEl(0)
+	head.onclick=function(){
+		window.location.href="userInfo"
+	}
+	for(var i=0;i<7;i++)
+	{
+		(function(i){
+			ob.getEl(i).onclick=function(){
+				var text=this.innerText.replace(/\s+/g,"")
+				var local = "*"
+                var flag = 0
+				var	tag=1
+				var	from="indexbar"
+                if(text=="县/区")
+				{
+					flag=1
+				}
+				else if(text=="市级")
+				{
+					flag=2
+				}
+				else if(text=="省级")
+				{
+					flag=3
+				}
+				else if(i<=4 & i>0&text!="自分组")
+				{
+					local =text
+                	flag =i-1
+					tag=2
+				}
 
-	ob0.onclick=function(){
-		mark.value=index[0]
-		mark.click()
+				if(i==0)
+					window.location.href="index"
+                if(i<=4 & i>0)
+                {
+					$().ajax({
+						"type":"post",
+						"url":"newslist",
+						"data":{"local":local,"flag":flag,"tag":tag,"from":from},
+						"fn":function(value){
+							window.location.href=value.responseText
+						}
+					})
+				}
+				if(text=="登录")
+				{
+					window.location.href="loading"
+				}
+				if(text=="退出")
+				{
+					window.location.href="quite"
+				}
+				if(text=="注册")
+				{
+					window.location.href="regist"
+				}
+
+
+			}
+		})(i)
 	}
-	ob1.onclick=function(){
-		mark.value=index[1]
-		mark.click()
-	}
-	ob2.onclick=function(){
-		mark.value=index[2]
-		mark.click()
-	}
-	ob3.onclick=function(){
-		mark.value=index[3]
-		mark.click()
-	}
-	ob4.onclick=function(){
-		mark.value=index[4]
-		mark.click()
-	}
+
 }

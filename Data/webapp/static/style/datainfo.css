@@ -49,17 +49,23 @@ body{
 	float:left;
 }
 
+
 #topbar ul{
+	float:left;
+	width: 85%;
 	height:60%;
 	margin: auto;
 	margin-top:2%;
 	float: left;
+	/*background: blue;*/
+	padding-left:5%;
 }
 
 #topbar ul li{
 	height:100%;
+	width:14.2% ;
+	/*background: red;*/
 	list-style:none;
-	margin-left:100px;
 	float:left;
 }
 
@@ -110,6 +116,18 @@ body{
 	box-shadow: 5px 5px 3px  #8F8F8F; 
 	/*border:1px solid black;*/
 }
+#items ul{
+	height: 100%;
+	width: 100%;
+}
+#items li{
+	/*background: yellow;*/
+	text-decoration: none;
+	list-style: none;
+	border-top:1px solid #ccc;
+	height: 10%;
+	cursor:pointer;
+}
 
 #content #pages{
 	background: green; 
@@ -120,6 +138,7 @@ body{
 	box-shadow: 5px 5px 3px #8F8F8F;
 
 }
+
 #content #pages a{
 	width: 30%;
 	font-size: 1.3em;

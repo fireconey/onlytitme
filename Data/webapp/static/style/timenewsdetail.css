@@ -53,16 +53,21 @@ body{
 }
 
 #topbar ul{
+	float:left;
+	width: 85%;
 	height:60%;
 	margin: auto;
 	margin-top:2%;
 	float: left;
+	/*background: blue;*/
+	padding-left:5%;
 }
 
 #topbar ul li{
 	height:100%;
+	width:14.2% ;
+	/*background: red;*/
 	list-style:none;
-	margin-left:100px;
 	float:left;
 }
 

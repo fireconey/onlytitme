@@ -1,61 +1,67 @@
-{%load static%}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Document</title>
+    <meta charset="UTF-8">
+    <title>Document</title>
     <script src={% static "js/jquery.js" %}></script>
-	<script src={% static "/js/newslist.js"%}></script>
-	<link rel="stylesheet" href={% static "style/newslist.css"%}>
-{#	<meta http-equiv="refresh" content="2">#}
+    <script src={% static "/js/newslist.js" %}></script>
+    <link rel="stylesheet" href={% static "style/newslist.css" %}>
+{#    	<meta http-equiv="refresh" content="2">#}
 </head>
 <body>
-	<div id="container">
-		{% include "model/head.html"%}
-		<div id="inner">
-			{% for i in range%}
-			<div class="left clickbolck">
-				<img src={%static "img/loading.jpg"%} alt="头像" class="headimg">
+<div id="container">
+    {% include "model/head.html" %}
+    <div id="inner">
+        <div class="tag">
+            <a href="#">{{ tag }}------>>></a>
+            <input type="button" value="修改" class="changeyes">
+            <input type="text" class="changeinput">
+            <input type="text" value="{{ value }}" style="display: none" id="flag">
+        </div>
+        {% for i in range %}
+            <div class="left clickbolck">
+                <img src={% static "img/loading.jpg" %} alt="头像" class="headimg">
                 <div class="name">th</div>
                 <div class="data">
-					left
-				</div>
-			</div>
+                    left
+                </div>
+            </div>
 
-			<div class="right clickbolck">
-				<img src={%static "img/loading.jpg"%} alt="头像" class="headimg">
-				 <div class="name">th</div>
+            <div class="right clickbolck">
+                <img src={% static "img/loading.jpg" %} alt="头像" class="headimg">
+                <div class="name">th</div>
                 <div class="data">
-					right
-				</div>
-			</div>
+                    right
+                </div>
+            </div>
 
-			<div class="middle clickbolck">
-				<img src={%static "img/loading.jpg"%} alt="头像" class="headimg">
-				 <div class="name">th</div>
+            <div class="middle clickbolck">
+                <img src={% static "img/loading.jpg" %} alt="头像" class="headimg">
+                <div class="name">th</div>
                 <div class="data">
-					middle
+                    middle
 
-				</div>	
-			</div>
-			{%endfor%}
-			<div id="button">
-				<div id="pre">
-					上一页
-				</div>
-				<div id="next">
-					下一页
-				</div>
-				<div id="number">
-					第<input type="text"  value=1 id="ipt">页/
-					<input type="button" value="确定" id="yes">
-					<div id="all">
-						{{ all }}
-					</div>
-				</div>
-			</div>
-		</div>
-		{%include "model/footer.html"%}
-	</div>
+                </div>
+            </div>
+        {% endfor %}
+        <div id="button">
+            <div id="pre">
+                上一页
+            </div>
+            <div id="next">
+                下一页
+            </div>
+            <div id="number">
+                第<input type="text" value=1 id="ipt">页/
+                <input type="button" value="确定" id="yes">
+                <div id="all">
+                    {{ all }}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% include "model/footer.html" %}
+</div>
 </body>
 </html>

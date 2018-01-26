@@ -35,8 +35,8 @@ def index(request):
         rq=request.POST
         if rq["tag"]=="fill":
             newsmodel= model.WebappNews
-            result=tool.query(newsmodel,int(rq["n"]),int(rq["m"]),rq["flag"]).get()
-            return HttpResponse(str(result))
+            result=tool.query(newsmodel,int(rq["n"]),int(rq["m"]),rq["local"],rq["flag"],rq["state"])
+            return HttpResponse(str(result.get()))
         elif rq["tag"]=="qry":
             newsmodel=model.WebappNews
             ob=newsmodel.objects.filter(flag=rq["flag"],loc=rq["local"])[0:15]
@@ -148,28 +148,6 @@ def  loading(request):
                  "u":"请输入账号",
                  "pw":"请输入密码"})
 
-
-def topbar(request):
-    global flag
-    if flag==1 and request.method=="POST":
-        data=request.POST
-        mark=data["mark"].strip()
-        if mark=="img":
-            return  HttpResponseRedirect("userInfo")
-        elif mark=="quite":
-            flag=0
-            return  HttpResponseRedirect("/index")
-        return HttpResponseRedirect(mark)
-
-    elif flag==0 and request.method=="POST":
-        data=request.POST
-        mark=data["mark"].strip()
-        if mark=="img":
-            return HttpResponseRedirect("index")
-        return  HttpResponseRedirect(mark)
-        # return  HttpResponseRedirect("index")
-    else:
-        return HttpResponseRedirect("/index")
 
 def quite(request):
     global flag
@@ -287,7 +265,7 @@ def userInfo(request):
                    })
 @csrf_exempt
 def timenewsdetail(request):
-    global title,name
+    global title,name,initusr,initimg
     img="#"
     good="无数据"
     bad="无数据"
@@ -328,12 +306,16 @@ def timenewsdetail(request):
                     "good":good,
                     "xinyong":xinyong,
                     "name":name,
+                    "initimg":initimg,
+                    "initusr":initusr,
                    })
 
 fl=0
+local=0
+tag=0
 @csrf_exempt
 def newsList(request):
-    global initusr, initimg,fl
+    global initusr, initimg,fl,local,tag
     ob = "登录"
     rg = "注册"
     try:
@@ -352,125 +334,40 @@ def newsList(request):
         ob = "退出"
         rg = "已登录"
     if request.method=="POST":
-        try:
-            fl=int(request.POST["flag"])
-            return  HttpResponse("newsList")
-        except:
-            pass
+        newsmodel = model.WebappNews
+        fro=request.POST["from"]
+        if fro=="indexlabel":
+            fl=request.POST["flag"]
+            local=request.POST["local"]
+            tag=request.POST["tag"]
+            return HttpResponse("newslist")
+        if fro=="indexbar":
+            fl=request.POST["flag"]
+            local=request.POST["local"]
+            tag=request.POST["tag"]
+            return HttpResponse("newslist")
 
-        count=int(request.POST["count"])-1
+        if fro=="newslist":
+            print(fl,"fl",local,"local",tag,"tag")
+            count = int(request.POST["count"]) - 1
+            ty = tool.query2(newsmodel, 60 * count, 60 * (1 + count), fl, local, tag).get()
+            print(ty)
+            return HttpResponse(str(ty))
 
-        newsmodel=model.WebappNews
-
-
-        ty=tool.query(newsmodel,60*count,60*(1+count),fl)
-
-        return  HttpResponse(str(ty.get()))
     return render(request,"pages/newslist.html",
                   {"range":range(1,21),
                    "ob":ob,
                    "rg":rg,
                    "initusr":initusr,
                    "initimg":initimg,
-                   "all":all
+                   "all":all,
+                   "tag":local,
+                   "value":fl,
                    })
 
-fl2=0
-@csrf_exempt
-def goodsList(request):
-    global initusr, initimg, fl2
-    ob = "登录"
-    rg = "注册"
-    try:
-        all = model.WebappShoping.objects.all().count()
-        if all % 80 != 0:
-            all = int(all/80) + 1
-
-    except:
-        all = 0
-
-    if flag == 0:
-        ob = "登录"
-        initimg = "../static/img/loading.jpg"
-        initusr = "姓名"
-    if flag == 1:
-        ob = "退出"
-        rg = "已登录"
-    if request.method=="POST":
-        try:
-            fl2 = int(request.POST["flag"])
-            return HttpResponse("goodsList")
-        except:
-            pass
-        count = int(request.POST["count"]) - 1
-
-        shoppingmodel =model.WebappShoping
-
-        ty = tool.querygoods(shoppingmodel, 80 * count, 80 * (1 + count), fl2)
-        hu=str(ty.get())
-
-        return HttpResponse(hu)
-    return render(request, "pages/goodsList.html",
-                  {"range": range(1, 21),
-                   "ob": ob,
-                   "rg": rg,
-                   "initusr": initusr,
-                   "initimg": initimg,
-                   "all": all
-                   })
 
 
 '''********************以下为有待替换的处理函数************'''
-@csrf_exempt
-def goods(request):
-    ob="登录"
-    rg="注册"
-    title="无数据"
-    img = "#"
-    name="无数据"
-    good="无数据"
-    bad="无数据"
-    xinyong="无数据"
-    phone="无数据"
-    price="无数据"
-    needintro="无数据"
-    content="无数据"
-    if flag==1:
-        ob="退出"
-        rg = "已登录"
-    if request.method=="POST":
-        name=request.POST["name"].strip()
-        title=request.POST["title"].strip()
-        return HttpResponse("goods")
-    try:
-        umodel = model.WebappUsr.objects.get(usr=name)
-        smodel = model.WebappShoping.objects.filter(usr=name,title=title)
-        emodel = model.eval.objects.get(usr=name)
-        img=umodel.img
-        phone=umodel.phone
-        good=emodel.good
-        bad=emodel.bad
-        price=smodel.price
-        needintro=smodel.needintro
-        xinyong=float("%.2f" %((good-bad)*100)/(good+bad+1))
-    except:
-            pass
-    return  render(request,"pages/goods.html",{"ob":ob,
-                                               "rg":rg,
-                                               "title":title,
-                                                "img":img,
-                                                "name":name,
-                                                "good":good,
-                                                "bad":bad,
-                                                "phone":phone,
-                                                "price":price,
-                                                "needintro":needintro,
-                                                "content":content,
-                                               "xinyong":xinyong
-                                               })
-
-
-
 def newsbackstage(request):
     return  render(request,"pages/newsbackstage.html")
 
@@ -481,28 +378,39 @@ def newsbackstage(request):
 
 
 
-
-def goodsBackstage(request):
-    ob="登录"
-    rg = "注册"
-    if flag==1:
-        ob="退出"
-        rg = "已登录"
-    return  render(request,"pages/goodsbackstage.html",
-                   {"ob":ob,
-                     "rg":rg
-
-                   })
-
+@csrf_exempt
 def info(request):
     ob="登录"
     rg = "注册"
     if flag==1:
         ob="退出"
         rg = "已登录"
+    if flag==0:
+        return HttpResponseRedirect("loading")
+    if request.method=="POST":
+
+        fla=request.POST["flag"]
+        if fla=="fill":
+            count = int(request.POST["count"])
+            title=[]
+            time=[]
+            news=model.WebappNews.objects.filter(usr=initusr)[(count-1)*10:count*10]
+            for i in range(0,news.count()):
+                title.append(news[i].title)
+                # time.append(news[i].time)
+            return  HttpResponse(str({"title":title}))
+        if fla=="content":
+            news=model.WebappNews.objects.filter(title=request.POST["title"])[0:1]
+            return  HttpResponse(news[0].content)
+
+
+
+
     return  render(request,"pages/info.html",
                    {"ob":ob,
-                     "rg":rg
+                     "rg":rg,
+                    "img":initimg,
+                    "usr":initusr
 
                    })
 
@@ -534,3 +442,8 @@ def infodetail(request):
 
 def head(request):
     return  render(request,"model/head.html")
+
+def t(request):
+    m=model.WebappNews.objects.filter(flag="3",loc="*")
+    print(m.count(),90000000)
+    return  HttpResponse("hao")

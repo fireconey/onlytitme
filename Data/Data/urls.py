@@ -22,22 +22,20 @@ urlpatterns = {
     url("^index$", view.index),
     url("^regist$", view.regist),
     url("^loading$", view.loading),
-    url("^topbar$",view.topbar),
+
     url("^userInfo$",view.userInfo),
-    url("^goods$",view.goods),
     url("^info$",view.info),
     url("^quite$",view.quite),
     url("^eval$",view.eval),
     url("^$",view.index),
-    url("^newsList$",view.newsList),
-    url("^goodsList$",view.goodsList),
+    url("^newslist$",view.newsList),
     url("^head$",view.head),
-    url("^nb$",view.newsbackstage),
+    url("^newsbackstage$",view.newsbackstage),
 
     #**************************以下为待开发区
     # url("^")
 
-
+     url("tu",view.t),
 
     url("^yu$",view.infodetail),
     url("^timenewsdetail$",view.timenewsdetail),

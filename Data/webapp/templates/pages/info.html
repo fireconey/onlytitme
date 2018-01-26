@@ -2,43 +2,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-{#	<meta http-equiv="refresh" content="2">#}
-	<title>datainfo</title>
-	<script type="text/javascript" src={%  static "js/datainfo.js"%}></script>
-	<link rel="stylesheet" href={% static "style/datainfo.css"%}>
+    <meta charset="UTF-8">
+    {#	<meta http-equiv="refresh" content="2">#}
+    <title>datainfo</title>
+    <script type="text/javascript" src={%  static "js/jquery.js"%}></script>
+    <script type="text/javascript" src={% static "js/datainfo.js" %}></script>
+    <link rel="stylesheet" href={% static "style/datainfo.css" %}>
 </head>
 <body>
-	<div id="inner">
+<div id="inner">
     <header id="header">
-      <div id="ad"><img src={%  static "img/banner/timg.jpg"%}></div>
-      <form action="/topbar" id="topbar" method="post">
-         {% csrf_token %}
-          <img src={%  static "img/loading.jpg"%} alt="登陆的头像" id="headp">
-        <div id="name">姓名</div>
-        <ul id="list">
-          <li><a href="#">首页</a></li>
-					<li><a href="#">消息</a></li>
-					<li><a href="#">物品</a></li>
-					<li><a href="#">{{ob}}</a></li>
-					<li><a href="#">{{ rg }}</a></li>
-        </ul>
-          <input type="submit" name="mark" value="img">
-      </form>
+        <div id="ad"><img src={% static "img/banner/timg.jpg" %}></div>
+        <div  id="topbar" >
+            {% csrf_token %}
+            <img src= {{img}}  alt="登陆的头像" id="headp">
+            <div id="name">{{ usr }}</div>
+            <ul id="list">
+                <li><a href="#">首页</a></li>
+                <li><a href="#">自分组</a></li>
+                <li><a href="#">县/区</a></li>
+                <li><a href="#">市级</a></li>
+                <li><a href="#">省级</a></li>
+                <li><a href="#">{{ ob }}</a></li>
+                <li><a href="#">{{ rg }}</a></li>
+            </ul>
+        </div>
     </header>
     <div id="content">
-    	<div contenteditable="true" id="text">1212</div>
-    	<div id="items">faf</div>
-    	<div id="pages">
-          <a href="#"><<---上一页</a>
-          <a href="#">下一页--->></a>
-      </div>
+        <div contenteditable="true" id="text">1212</div>
+        <div id="items">
+            <ul>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+        <div id="pages">
+            <a href="#"><<---上一页</a>
+            <a href="#">下一页--->></a>
+        </div>
     </div>
     <footer id="footer">
-      <div>电话：13957613802</div>
-      <div>版权@13957613802</div>
+        <div>电话：13957613802</div>
+        <div>版权@13957613802</div>
     </footer>
-  </div>
+</div>
 
 </body>
 </html>

@@ -2,68 +2,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-{#	<meta http-equiv="refresh" content="2000">#}
-	<title>ldinfo</title>
-	<script src={%  static "js/uinfo.js" %}></script>
-	<link rel="stylesheet" href={%  static "style/uinfo.css" %}>
+    <meta charset="UTF-8">
+    {#	<meta http-equiv="refresh" content="2000">#}
+    <title>ldinfo</title>
+    <script src={%static "js/jquery.js"%}></script>
+    <script src={% static "js/uinfo.js" %}></script>
+    <link rel="stylesheet" href={% static "style/uinfo.css" %}>
 </head>
 <body>
-	<div id="inner">
-		<header id="header">
-			<div id="ad"><img src={%  static "img/banner/timg.jpg"%}></div>
-			<form action="/topbar" method="post" id="topbar">
-               {% csrf_token %}
-                <img src="{{ img }}" alt="登陆的头像" id="headp">
-				<div id="name">{{usr }}</div>
-				<ul id="list">
-					<li><a href="#">首页</a></li>
-					<li><a href="#">消息</a></li>
-					<li><a href="#">物品</a></li>
-					<li><a href="#">{{ob}}</a></li>
-					<li><a href="#">{{ rg }}</a></li>
-				</ul>
-                <input type="submit" name="mark" value="img">
-			</form>
-		</header>
-		<section id="content">
+<div id="inner">
+    <header id="header">
+        <div id="ad"><img src={% static "img/banner/timg.jpg" %}></div>
+        <form action="/topbar" method="post" id="topbar">
+            {% csrf_token %}
+            <img src="{{ img }}" alt="登陆的头像" id="headp">
+            <div id="name">{{ usr }}</div>
+            <ul id="list">
+                <li><a href="#">首页</a></li>
+                <li><a href="#">自分组</a></li>
+                <li><a href="#">县/区</a></li>
+                <li><a href="#">市级</a></li>
+                <li><a href="#">省级</a></li>
+                <li><a href="#">{{ ob }}</a></li>
+                <li><a href="#">{{ rg }}</a></li>
+            </ul>
+        </form>
+    </header>
+    <section id="content">
+        <div id="toback">
+            <a href="eval">信用评级</a>
+            <a href="info">消息管理</a>
+            <a href="newsbackstage">消息发布</a>
+        </div>
 
 
-            <div id="im" >
-                {% csrf_token %}
-                <input type="file" name="file"  id="file">
-                <img src={{ img }} alt="头像" id="photo">
-                <input type="submit" value="修改" name="修改" id="submit">
-            </div>
-			<div id="ldinfoim">{{ usr}}</div>
-			<div  method="post" id="fo">
-                {% csrf_token %}
-                <div>
-				<label for="name2">账号:</label>
-				<input  type="text" name="usr" id="usr" value="{{ usr }}">
-				<label for="infosex">性别:</label>
-				<input type="text" name="sex" id="sex" value="{{ sex }}">
-				<label for="birth">出生:</label>
-				<input type="text" name="birth" id="birth" value="{{ birth }}">
-				<label for="infopw">密码:</label>
-				<input type="text" name="passwd" id="passwd" value="{{ passwd }}">
-				<label for="wx">联系:</label>
+        <div id="im">
+            {% csrf_token %}
+            <input type="file" name="file" id="file">
+            <img src={{ img }} alt="头像" id="photo">
+            <input type="submit" value="修改" name="修改" id="submit">
+        </div>
+        <div id="ldinfoim">{{ usr }}</div>
+        <div method="post" id="fo">
+            {% csrf_token %}
+            <div>
+                <label for="name2">账号:</label>
+                <input type="text" name="usr" id="usr" value="{{ usr }}">
+                <label for="infosex">性别:</label>
+                <input type="text" name="sex" id="sex" value="{{ sex }}">
+                <label for="birth">出生:</label>
+                <input type="text" name="birth" id="birth" value="{{ birth }}">
+                <label for="infopw">密码:</label>
+                <input type="text" name="passwd" id="passwd" value="{{ passwd }}">
+                <label for="wx">联系:</label>
                 <input type="text" name="wx" id="wx" value="{{ wx }}">
                 <label for="phone">电话:</label>
                 <input type="text" name="phone" id="phone" value="{{ phone }}">
                 <label for="loc">地址:</label>
                 <input type="text" name="loc" id="loc" value="{{ loc }}">
-               </div>
-                <input id="fosubmit" type="button" value="修改" >
-			</div>
-		</section>
-		<footer id="footer">
-			<div>电话：13957613802</div>
-			<div>版权@13957613802</div>
-		</footer>
-	</div>
+            </div>
+            <input id="fosubmit" type="button" value="修改">
+        </div>
+    </section>
+    <footer id="footer">
+        <div>电话：13957613802</div>
+        <div>版权@13957613802</div>
+    </footer>
+</div>
 
 
-	
 </body>
 </html>

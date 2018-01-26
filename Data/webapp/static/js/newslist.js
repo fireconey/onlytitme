@@ -4,6 +4,7 @@ window.onload=function(){
 	filldata()
 	button()
 	showdetail()
+	changlabel()
 }   
 
 window.onresize=function() {
@@ -15,6 +16,10 @@ function initbody(){
 	    container.style.height=container.offsetWidth/0.42183623+"px"
 	var hg=document.getElementById("headp")
 	    hg.style.height=hg.offsetWidth+"px"
+	var img=document.getElementById("headp");
+	    img.style.width=img.offsetHeight+"px"
+	var headimg=$(".headimg").getEl(0)
+	    headimg.style.width=headimg.offsetHeight+"px"
 
 
 }
@@ -27,8 +32,8 @@ function filldata(){
 	var content=$(".data")
 	$().ajax({
 		"type":"post",
-		"url":"newsList",
-		"data":{"count":count},
+		"url":"newslist",
+		"data":{"count":count,"from":"newslist"},
 		"fn":function(value)
 		{
 			var v=value.responseText.replace(/\'/g,'"')
@@ -109,4 +114,23 @@ function showdetail(){
 	}
 }
 
+function changlabel() {
+    var title = $(".tag").findchild("a").getEl(0)
+    var changinput = $(".changeinput").getEl(0)
+    var changeyes = $(".changeyes").getEl(0)
+	var flag=$("#flag").getEl(0)
+   changeyes.onclick=function()
+   {
+   	$().ajax({
+		"type":"post",
+		"url":"newslist",
+		"data":{"local":changinput.value,"flag":flag.value},
+		"fn":function(value){
+			if(value.responseText!="none")
+			window.location.href=value.responseText
+			else alert("没有此分组")
+		}
+	})
+   }
 
+}

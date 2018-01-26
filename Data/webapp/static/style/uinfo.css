@@ -52,18 +52,23 @@ background-color: rgba(211,211,211,0.5);
 	color:#FFF;
 	float:left;
 }
-#topbar ul{
 
+#topbar ul{
+	float:left;
+	width: 85%;
 	height:60%;
 	margin: auto;
 	margin-top:2%;
 	float: left;
+	/*background: blue;*/
+	padding-left:5%;
 }
 
 #topbar ul li{
 	height:100%;
+	width:14.2% ;
+	/*background: red;*/
 	list-style:none;
-	margin-left:100px;
 	float:left;
 }
 
@@ -95,7 +100,24 @@ background-color: rgba(211,211,211,0.5);
 
 }
 
+#toback{
+	margin-top:15%;
+	float: left;
+	width:10%;
+	height:40%;
+	background:yellow;
 
+}
+#toback a{
+	text-decoration: none;
+	margin-top:2%;
+	display: block;
+	width: 100%;
+	height: 10%;
+	color:#FFF;
+	background: green;
+
+}
 #content #im{
 	width:10%;  
 	margin:auto;

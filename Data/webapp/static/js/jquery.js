@@ -122,7 +122,7 @@ function chajian()
 
 
 	/*******通过调用上面其中某个方法后得到一个对象，根据此对象得到子对象***********/
-
+    
 	this.findchild = function(y) 
 	{
 		y = y.toLowerCase();
@@ -146,7 +146,9 @@ function chajian()
 			flag = "tagName";
 			break
 		}
-
+       /*
+        *对每个父元素的子元素进行查找，对符合规则的都进行存储。
+       */
 
 		for (var i = 0; i < this.element.length; i++) 
 		{
@@ -154,9 +156,14 @@ function chajian()
 
 			this.child -= 1
 			var ko = this.child
-				/*某对象没有子元素的情况下看看
-				传入的参数是否还有（参数个数倒
-				减计算的形式）是这种的情况就警告*/
+				/*多级查询时调用了findchild函数，
+				如$("#id .class div")中
+				如果在中途中如.class 就没有字元素（如上面的div）
+				就报错。
+
+				某对象没有子元素的情况下看看
+				传入的同级别的参数是否还有（参数个数倒
+				减计算的形式知道是否还有），还有的时就警告并结束*/
 				if (ele.length == 0 && ko != 0) 
 				{
 					alert("父级已经没有子级了！" + "\n报错级数为：" + ale + "\n在findchild函数中报错")
@@ -188,9 +195,15 @@ function chajian()
 
 
 
+  
 
 
 	/*****************多级选择*****************/
+	 /*
+      $().query(".class  #id ")
+      $(".class #id")
+
+   */
 	this.child = 0 //数据由query修改传给findchild，用于计数有多少个参数传入
 	this.query = function(x) 
 	{   _x=x    //在操作插入一次中要求更新，所以后面要调用这个函数参数一样
@@ -317,6 +330,7 @@ function chajian()
 	/*
 	使用：$("XX"||空值).getEl(数值||"all") 
 	得到元素后就可以使用js原生的方法了。
+	$("XX"||空值).getEl(数值||"all","$")可以继续使用$()内部的方法 
 	*/
 	this.getEl=function()
 	{
@@ -935,8 +949,15 @@ function chajian()
 	没有返回值
 	使用1方法：$(XXX).insertBefore(content)
 	使用2方法：$().insertBefore(content,元素)
-    content不能是纯文本(带有html标签)，否则多
+    content不能是纯文本(必须带有html标签)，否则多
     次添加有可能冲掉前面的添加内容
+    如:<div></div>   <p></p>,在p前添加为存文本
+    <div></div>  我添加的文字 <p></p>，再次添加文字："哈哈"
+    就会变成 <div></div>  哈哈 <p></p>；
+    如果带有标签就不会<div></div>
+    <span>我添加的文字</span>
+    <span>哈哈</span>
+    <p></p>
     */
     this.insertBefore=function(content)
     {   
@@ -1093,6 +1114,14 @@ function chajian()
       }
      
 	}
+
+	/********************重写json解决每次通过ajax获取的数据有单引号不能变成json的问题****/
+	this.json=function(_Y)
+	{  var _Y=_Y.replace(/\s+/g,"").replace(/\'/g,'"')
+       var value=JSON.parse(_Y)
+       return value
+	}
+
 
 }
 
