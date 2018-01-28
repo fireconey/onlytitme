@@ -1,36 +1,40 @@
-window.onload=function(){
-	initbody()
-	img()
-	bar()
+window.onload = function () {
+    initbody()
+    img()
+    bar()
     filldata(1)
     showparper()
+    delet()
+    manager()
+
+}
+
+//由于标记是第几页
+var count = 1
+
+window.onresize = function () {
+    initbody()
+
+}
+
+function initbody() {
+    var ob = document.getElementById("inner")
+    var w = ob.offsetWidth
+    ob.style.height = w / 0.795 + "px"
+    var headp = document.getElementById("headp")
+    headp.style.width = headp.offsetHeight + "px"
+
 
 }
 
 
-window.onresize=function(){
-	initbody()
-
-}
-
-function initbody(){
-	var ob=document.getElementById("inner")
-	var w=ob.offsetWidth
-	    ob.style.height=w/0.795+"px"
-	     var headp=document.getElementById("headp")
-	    headp.style.width=headp.offsetHeight+"px"
-	    
-	   
-}
-
-
-function img(){
-	var ob=document.getElementsByName("mark")[0];
-	var img=document.getElementById("headp");
-	img.onclick=function(){
-		ob.value="img";
-		ob.click();
-	}
+function img() {
+    var ob = document.getElementsByName("mark")[0];
+    var img = document.getElementById("headp");
+    img.onclick = function () {
+        ob.value = "img";
+        ob.click();
+    }
 
 }
 
@@ -99,21 +103,32 @@ function bar() {
 /*
 * 数据填充
 * */
-function filldata(count){
-    var li=$("#items").findchild("ul").findchild("li")
+all=1
+function filldata(count) {
+    var span = $("#items ul li span")
     $().ajax({
-        "type":"post",
-        "url":"info",
-        "data":{"count":count,"flag":"fill"},
-        "fn":function(value){
-            var v=value.responseText.replace(/\'/g,'"')
-            var json=JSON.parse(v)
-            for(var i=0;i<10;i++)
-            {
-                var data=json["title"][i]
-                if(typeof(data)!="undefined")
-                {
-                    li.getEl(i).innerText=(count-1)*10+(i+1)+"*》"+data
+        "type": "post",
+        "url": "info",
+        "data": {"count": count, "flag": "fill"},
+        "fn": function (value) {
+            var v = value.responseText.replace(/\'/g, '"')
+            var json = JSON.parse(v)
+            len = json["title"].length
+            all=json["all"]
+            //解决数据删除后，数据库修改了，原来的
+            //位置数据没有刷新的问题。
+            for (var i = 0; i < 10; i++)
+                span.getEl(i).innerText = ""
+
+            for (var i = 0; i < len; i++) {   //由于数据库是栈的形式所以要倒序填充数据
+                //-1是由于长度和下标相差1
+                var data = json["title"][len - 1 - i]
+                if (typeof(data) != "undefined") {
+                    span.getEl(i).innerText = (count - 1) * 10 + (i + 1) + "*》" + data
+                }
+                else {
+                    span.getEl(i).innerText = ""
+
                 }
 
             }
@@ -125,31 +140,85 @@ function filldata(count){
 /*
 * 点击后显示具体内容
 * */
-function  showparper()
-{
-    var ob = $("#items").findchild("ul").findchild("li");
-    var content=$("#text").getEl(0)
-    for(var i=0;i<10;i++)
-    {
+function showparper() {
+    var ob = $("#items ul li span")
+    var content = $("#text").getEl(0)
+    for (var i = 0; i < 10; i++) {
         (
-            function(i)
-            {
-                ob.getEl(i).onclick=function()
-                {
-                    var title= this.innerText.split("*》")[1].replace(/\s+/g, "");
+            function (i) {
+                ob.getEl(i).onclick = function () {
+                    var title = this.innerText.split("*》")[1].replace(/\s+/g, "");
+                    if (title != "") {
+                        $().ajax({
+                            "type": "post",
+                            "url": "info",
+                            "data": {"title": title, "flag": "content"},
+                            "fn": function (value) {
+                                content.innerHTML = value.responseText
 
-                  $().ajax({
-                      "type":"post",
-                      "url":"info",
-                      "data":{"title":title,"flag":"content"},
-                      "fn":function(value){
-                          content.innerHTML=value.responseText
+                            }
 
-                      }
-
-                  })
+                        })
+                    }
                 }
             }
         )(i)
     }
+}
+
+/*
+* 点击删除就删除
+* */
+function delet() {
+    var ob = $("#items ul li .delet")
+    var content = $("#text")
+    for (var i = 0; i < 10; i++) {
+        (
+            function (i) {
+                ob.getEl(i).onclick = function () {
+                    var title = this.previousSibling.previousSibling.previousSibling.previousSibling.innerText.replace(/\s+/g, "").split("*》")[1]
+                    $().ajax({
+                        "type": "post",
+                        "url": "info",
+                        "data": {"title": title, "flag": "delet"},
+                        "fn": function (value) {
+                            filldata(count)
+                            content.getEl(0).innerText = ""
+                        }
+                    })
+
+                }
+            }
+        )(i)
+    }
+}
+
+/*
+* 点击管理进入管理界面
+* */
+function manager() {
+    var ob = $("li .change")
+    var titl = $("li span")
+    for (var i = 0; i < 10; i++) {
+        (function (i) {
+                ob.getEl(i).onclick = function () {
+                    title = titl.getEl(i).innerText.replace(/\s+/g,"").split("*》")[1]
+                    if(typeof(title)!="undefined")
+                    {
+                        $().ajax({
+                        "type": "post",
+                        "url": "newsbackstage",
+                        "data": {"title": title, "flag": "param"},
+                        "fn": function (value) {
+                            window.location.href = value.responseText
+                        }
+                    })
+                    }
+
+
+                }
+            }
+        )(i)
+    }
+
 }

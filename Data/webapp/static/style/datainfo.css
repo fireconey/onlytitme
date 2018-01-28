@@ -126,7 +126,26 @@ body{
 	list-style: none;
 	border-top:1px solid #ccc;
 	height: 10%;
+	width: 100%;
 	cursor:pointer;
+}
+#items ul li span{
+	display: block;
+	float: left;
+	margin-top:5%;
+	font-size: 1.2em;
+	width: 80%;
+	overflow-x: hidden;
+	/*background: red;*/
+}
+#items  ul li div{
+	color:yellow;
+	float:right;
+	height:80%;
+	width: 10%;
+	padding-top: 2%;
+	margin-top:1%;
+	background: green;
 }
 
 #content #pages{

@@ -368,8 +368,30 @@ def newsList(request):
 
 
 '''********************以下为有待替换的处理函数************'''
+title=""
+content=""
+loc=""
+flag=""
+
+@csrf_exempt
 def newsbackstage(request):
-    return  render(request,"pages/newsbackstage.html")
+    global title,content,loc,flag
+    if request.method=="POST":
+        result=request.POST
+        if result["flag"]=="param":
+            title = result["title"]
+            news=model.WebappNews.objects.filter(title=title)[0]
+            content=news.content
+            loc=news.loc
+            flag=news.flag
+            return HttpResponse("newsbackstage")
+
+    return  render(request,"pages/newsbackstage.html",{
+                                        "title":title,
+                                        "content":content,
+                                        "loc":loc,
+                                        "flag":flag
+                                        })
 
 
 
@@ -394,14 +416,30 @@ def info(request):
             count = int(request.POST["count"])
             title=[]
             time=[]
-            news=model.WebappNews.objects.filter(usr=initusr)[(count-1)*10:count*10]
+            news=model.WebappNews.objects.filter(usr=initusr)
+            all=news.count()
+            n=0
+            m=0
+            if all%10!=0:
+                all=(int(all/10)+1)*10
+                n=all-count*10
+                m = all - (count - 1) * 10
+            if n<0 or m<0:
+                n=0
+                m=0
+            news=news[n:m]
+            print(news,all)
             for i in range(0,news.count()):
                 title.append(news[i].title)
                 # time.append(news[i].time)
-            return  HttpResponse(str({"title":title}))
+            return  HttpResponse(str({"title":title,"all":all}))
         if fla=="content":
             news=model.WebappNews.objects.filter(title=request.POST["title"])[0:1]
             return  HttpResponse(news[0].content)
+        if fla=="delet":
+            title=request.POST["title"]
+            news=model.WebappNews.objects.filter(title=title).delete()
+            return HttpResponse("info")
 
 
 

@@ -14,10 +14,10 @@
 	<div id="container">
 		<div id="inner">
 			<div id="title" contenteditable="true">
-				我要去吉首
+				{{ title }}
 			</div>
 			<div contenteditable="true" id="content">
-				fsdf
+				{{ content }}
 			</div>
 			<div type="text" id="loc">
 				<select name="province6" class="loc">
@@ -26,7 +26,7 @@
 				</select>
 				<select name="area6" class="loc">
 				</select>
-				<input type="text" id="group" >
+				<input type="text" id="group" value={{ loc }} >
 			</div>
 			<div id="button">
 				<input type="submit" value="发布" id="yes" >
