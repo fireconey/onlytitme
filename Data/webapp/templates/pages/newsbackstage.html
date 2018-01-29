@@ -12,28 +12,63 @@
 </head>
 <body>
 	<div id="container">
+		{% include "model/head.html" %}
 		<div id="inner">
+			<div id="edite">
+				<div id="time">
+					留存时间：
+					<input type="text" class="time" value="1">天
+					<input type="text" class="time" value="1">时
+					<input type="text" class="time" value="1">分
+				</div>
+				<div type="text" id="loc">
+					<select name="select" id="select">
+						<option value="0">自分组</option>
+						<option value="1">县/区级</option>
+						<option value="2">市级</option>
+						<option value="3">省级</option>
+					</select>
+					<input type="text" id="group" value={{ loc }} >
+				</div>
+				<div id="font">
+					<ul>
+						<li><img src={%static "img/edite/left.jpg"%} alt=""></li>
+						<li><img src={%static "img/edite/middle.jpg"%} alt=""></li>
+						<li><img src={%static "img/edite/right.jpg"%} alt=""></li>
+						<li><img src={%static "img/edite/B.jpg"%} alt=""></li>
+						<li><img src={%static "img/edite/color.jpg"%} alt=""></li>
+						<li><img src={%static "img/edite/big.jpg"%} alt=""></li>
+						<li><img src={%static "img/edite/small.jpg"%} alt=""></li>
+						<li><img src={%static "img/edite/back.jpg"%} alt=""></li>
+						<li><img src={%static "img/edite/img.jpg"%} alt=""></li>
+						<li id="submit"><input type="button" value="上传"></li>
+						<li><img src={%static "img/edite/undo.jpg"%} alt=""></li>
+
+						<input type="file" id="file" >
+						{% include "model/colorpicker.html" %}
+					</ul>
+				</div>
+			</div>
 			<div id="title" contenteditable="true">
 				{{ title }}
 			</div>
-			<div contenteditable="true" id="content">
+			<div class="imgsize">
+				<div>请输入尺寸</div>
+				宽<input type="text">px
+				 高<input type="text">px
+				 <input type="button" value="修改" id="changeimgsize">
+				</div>
+			<div contenteditable="true" id="content" >
 				{{ content }}
 			</div>
-			<div type="text" id="loc">
-				<select name="province6" class="loc">
-				</select>
-				<select name="city6" class="loc">
-				</select>
-				<select name="area6" class="loc">
-				</select>
-				<input type="text" id="group" value={{ loc }} >
-			</div>
+			
 			<div id="button">
-				<input type="submit" value="发布" id="yes" >
-				<input type="button" value="取消" id="cancel">
+				<a  id="yes"  class="button">{{button}}</a>
+				<a href="index"  id="cancel" class="button">取消</a> 
 			</div>
 			
 		</div>
+
 	</div>
 </body>
 </html>

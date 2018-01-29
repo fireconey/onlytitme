@@ -1,0 +1,86 @@
+	<div id="_colorset" >
+		<input type="button",cl="" class="_color">
+		<input type="button",cl="" class="_color">
+		<input type="button",cl="" class="_color">
+		<input type="button",cl="" class="_color">
+		<input type="button",cl="" class="_color">
+		<input type="button",cl="" class="_color">
+		<input type="button",cl="" class="_color">
+		<input type="button",cl="" class="_color">
+		<input type="button",cl="" class="_color">
+		<input type="button",cl="" class="_color">
+		<input type="button",cl="" class="_color">
+		<input type="button",cl="" class="_color">
+		<input type="button",cl="" class="_color">
+		<input type="button",cl="" class="_color">
+		<input type="button",cl="" class="_color">
+		<input type="button",cl="" class="_color">
+		<input type="button",cl="" class="_color">
+		<input type="button",cl="" class="_color">
+		<input type="button",cl="" class="_color">
+		<input type="button",cl="" class="_color">
+		<input type="button",cl="" class="_color">
+		<input type="button",cl="" class="_color">
+		<input type="button",cl="" class="_color">
+		<input type="button",cl="" class="_color">
+
+
+	</div>
+	<style>
+	#_colorset{
+		display:none;
+		background:#FFF;
+		border:1px solid #CCC;
+		width:176px;
+		height:117px;
+        z-index: 1;
+        position: absolute;
+        top:10%;
+
+	}
+
+	._color{
+		border-style: none;
+		float: left;
+		width:25px;
+		margin:2px;
+		height:25px;
+		cursor:pointer;
+		border: 1px solid #ccc;
+	}
+</style>
+<script>
+	var  value=""
+    var  command=""
+    function fillcolor()
+    {
+        colorlist=["E5006A","E5004F","FF0000","EB6100","F39800","FCC800","FFF100","CFDB00","8FC31F","22AC38","009944","009B6B","009E96","00A0C1","00A0E9","0086D1","0068B7","00479D","1D2088","601986","920783","BE0081","FFF","000"]
+	var ob=$("#_colorset ._color")
+	for(var i=0;i<24;i++)
+	{
+
+		(function(j){
+			ob.getinnerEl(i).css("background:#"+colorlist[i])
+			ob.getEl(i).cl="#"+colorlist[i]
+			ob.getEl(j).onclick=function(e)
+			{
+				value=this.cl
+				$("#_colorset").css("display:none")
+                document.execCommand(command,"false",value)
+			}
+		})(i)
+
+	}
+    }
+
+    function colorpicker(e,cmd)
+    {
+        var ko=$("#_colorset")
+        command=cmd
+        ko.css("display:block,top:"+(e.clientY-50)+"px,"+"left:"+(e.clientX-300)+"px")
+
+    }
+
+    fillcolor()
+
+</script>

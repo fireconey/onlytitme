@@ -371,11 +371,18 @@ def newsList(request):
 title=""
 content=""
 loc=""
-flag=""
+flag2=""
 
 @csrf_exempt
 def newsbackstage(request):
-    global title,content,loc,flag
+    global title,content,loc,flag2,flag,initimg,initusr
+    ob = "登录"
+    rg = "注册"
+    if flag == 0:
+       return HttpResponseRedirect("index")
+    if flag == 1:
+        ob = "退出"
+        rg = "已登录"
     if request.method=="POST":
         result=request.POST
         if result["flag"]=="param":
@@ -383,18 +390,53 @@ def newsbackstage(request):
             news=model.WebappNews.objects.filter(title=title)[0]
             content=news.content
             loc=news.loc
-            flag=news.flag
+            flag2=news.flag
             return HttpResponse("newsbackstage")
-
     return  render(request,"pages/newsbackstage.html",{
-                                        "title":title,
-                                        "content":content,
-                                        "loc":loc,
-                                        "flag":flag
+                 "title":title,"content":content,"loc":loc,
+                 "flag":flag2,"initusr":initusr,"initimg":initimg,
+                 "ob":ob,
+                 "rg":rg,
+                 "button":"修改"
+
+                                        })
+
+def newsbackstage2(request):
+    global flag,initimg,initusr
+    ob = "登录"
+    rg = "注册"
+    if flag == 0:
+        return HttpResponseRedirect("index")
+    if flag == 1:
+        ob = "退出"
+        rg = "已登录"
+    title=""
+    content=""
+    loc=""
+    return  render(request,"pages/newsbackstage.html",{
+                 "title":title,"content":content,"loc":loc,
+                 "flag":flag2,"initusr":initusr,"initimg":initimg,
+                 "ob":ob,
+                 "rg":rg,
+                 "button":"发布"
+
                                         })
 
 
-
+@csrf_exempt
+def file(request):
+    global initusr
+    if request.method=="POST":
+        try:
+            file=request.FILES["file"]
+        except:
+            return HttpResponse("falise")
+        if not os.path.exists("webapp/static/" +initusr) and initusr!="姓名":
+            os.mkdir("webapp/static/" +initusr)
+        with open("webapp/static/" + initusr + "/" + file.name, "wb+") as f:
+            for i in file:
+                f.write(i)
+    return  HttpResponse("static/"+initusr+"/"+file.name)
 
 
 
@@ -477,9 +519,6 @@ def infodetail(request):
 
 
 
-
-def head(request):
-    return  render(request,"model/head.html")
 
 def t(request):
     m=model.WebappNews.objects.filter(flag="3",loc="*")
