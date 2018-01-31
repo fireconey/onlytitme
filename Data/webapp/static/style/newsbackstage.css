@@ -130,7 +130,7 @@ body{
 	display: none;
 }
 #inner #title{
-	
+	display: block;
 	margin:auto;
 	margin-top:1%; 
 	width: 80%;

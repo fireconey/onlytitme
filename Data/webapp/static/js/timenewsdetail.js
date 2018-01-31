@@ -2,6 +2,7 @@ window.onload = function () {
     initbody()
     img()
     bar()
+    filleval()
 
 }
 
@@ -13,12 +14,12 @@ window.onresize = function () {
 function initbody() {
     var ob = document.getElementById("inner")
     var w = ob.offsetWidth
-    ob.style.height = w / 0.8752 + "px"
+    // ob.style.height = w / 0.8752 + "px"
     // alert(ob.offsetHeight)
     var headp = document.getElementById("headp")
     var img2=document.getElementById("img2")
     headp.style.width = headp.offsetHeight + "px"
-    img2.style.width = img2.offsetHeight + "px"
+    // img2.style.width = img2.offsetHeight + "px"
 }
 
 function img() {
@@ -87,4 +88,56 @@ function bar() {
             }
         })(i)
     }
+}
+
+
+
+
+
+/*
+加载评论
+*/
+
+function filleval()
+{  
+  var name=$("#name").getEl(0)
+  var title=$("title").getEl(0)
+
+
+ $().ajax({
+    "type":"post",
+    "url":"timenewsdetail",
+    "data":{"title":title,"usr":name,"flag":"fill"},
+    "fn":function(value)
+    {
+        var li=""
+        var ob=$("#othereva").getEl(0)
+
+        
+        var json=JSON.parse(value)
+        for(var i=0;i<json.length;i++)
+        {
+            var ele="<ul class='ul'>"+
+                    "<li class='li1 li'>"+
+                        "<img src='"+json["img"]+"' alt='浮动''>"+
+                        "<div class='othername'>"+json["name"]+"</div>"+
+                    "</li>"+
+                    " <li class='li2 li'>"+
+                    json["content"]
+                    "</li>"+
+                "</ul>"
+                li=li+ele
+                
+        }
+        ob.innerHTML=li
+
+             
+             
+         
+
+
+    }
+    })
+    
+    
 }

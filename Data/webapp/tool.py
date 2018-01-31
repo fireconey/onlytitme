@@ -53,10 +53,8 @@ def query(model,n,m,local,fl,state):
         ob = model.objects.filter(flag=fl,loc=local)[n:m]
 
     number=ob.count()
-    print("number",number)
     for i in range(0, number):
         img.append(model2.WebappUsr.objects.get(usr=ob[i].usr.usr).img)
-        # print(i,"***",img)
         title.append(ob[i].title)
         content.append(ob[i].content)
         usr.append(ob[i].usr.usr)
@@ -65,8 +63,6 @@ def query(model,n,m,local,fl,state):
         title.append("无数据")
         content.append("无数据")
         usr.append("空")
-    print("img",img)
-
     pack.clear()
     pack.set(img, "img")
     pack.set(title,"title")

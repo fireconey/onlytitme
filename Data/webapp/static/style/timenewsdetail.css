@@ -18,7 +18,7 @@ body{
 }
 #header{
 	width:100%;
-	height:21.36%;
+	height:250px;
 	margin-bottom:1%;
 	box-shadow: 5px 5px 3px #8F8F8F; 
 	
@@ -89,138 +89,164 @@ body{
 
 #content{
 	width:100%; 
-	height:59.82%;
+	height:800px;
 	/*	background: red;*/
     background: #FFF;
 	box-shadow: 5px 5px 3px #8F8F8F; 
 	border:0.5px solid #ccc;
+	/*background: blue;*/
 }
 
 
 
 #content #otherinfo{
+	position: relative;
 	width:40%; 
-	height:100%; 
-	padding-top:1%; 
-	float: left;
-	/*	background: yellow;*/
+	height:15%; 
+	/*background: yellow;*/
+	margin: auto;
+	margin-bottom:1%;
+	/*margin-left: 10%;  */
 	
 
 }
 
 
-#content #otherinfo img{
-	height: 15%;
+#otherinfo img{
+	
+	height:100%;
 	border-radius: 50%;
 	display: block;
 	margin: auto;
+	margin-top:1%; 
 
 }
-#otherinfo #name{
-	width:100%;
-	padding-top:1%; 
-	height:5%; 
-	text-align:center;
-	/*color:green; */
-}
 
-#content #otherinfo #usrxy{
-	padding-top:2%; 
-	width:98%;
-	height:10%;  
+#otherinfo #usrxy{
+	position:absolute;
+	top:20%; 
+	left:68%;
+	z-index:2; 
+	width:110%;
+	height:60%;  
 	color:#FFF; 
 	margin-left:1%; 
 	text-align: center;
-	line-height:160%;
 	background: green;
 
-}
-#otherinfo #achievment{
-	/*background: green;*/
-
-	height:71%; 
 
 }
-#achievment label{
-	float: left;
-	height:15%;
-	width: 33.3%;
-	/*color:green;*/
-	/*background:blue; */
-	padding-top:5%; 
-	font-size: 120%;
-	text-align: right;
+/*#usrxy div{
+	line-height:120%; 
+
+}*/
 
 
-}
-#achievment input{
-	width:40%; 
-}
 
-#achievment #edit{
-	clear:both; 
-	height:70%;
-	width:98%;
-	margin:auto;
-	margin-left:1%;
-	border:1.5px solid green; 
-}
-#achievment #submit{
-	display: block;
-	background: #fff;
-	/*color:gre;*/
-	width:98%;
-	height:10%; 
-	font-size:1.2em; 
-	margin:auto;
-	margin-top:1%;
-	border-radius: 3px;
-	border-style: none;
-	border:1.5px solid green;
-}
 
 #content  #usrinfo{
-	height:100%;
-	width:59.8%;
+	height:82%;
+	width:80%;
 	/*color:#FFF;*/
-	float:right;
+	margin:auto;
+	border:1px solid green; 
 }
 
-#content  #usrinfo div{
-	border-top: 1px solid green;
-	height: 30%;
-}
-#content #usrinfo #title
+
+#usrinfo #title
 {   color:#FFF;
 	border: none;
-	height: 10%;
+	height: 8%;
 	text-align: center;
-	padding-top:3%;
-	font-size:1.3em; 
-	background: green
+	padding-top:0.5%;
+	font-size:1.5em; 
+	color:black;
+	border-bottom: 1px dashed green;
+	/*background: green*/
 }
 
-#content #usrinfo #ct{
-	height:75% ;
-	padding-left:5%;
-	padding-right: 5%; 
-	padding-top: 4%;
-	outline: none;
+#usrinfo #ct{
+	height:87%;
+	overflow:auto;
 	/*background: orange;*/
 	/*color:#FF;*/
-	border:1px solid green; 
-
-
-
-
 }
 
-#content #usrinfo #call{
-	height: 13.5%;
+#usrinfo #call{
+	height:5%;
+	border-top: 1px dashed green;
 	background:green;
 }
 
+#eva{
+	margin-top:10px; 
+	background:#FFF;
+	box-shadow: 5px 5px 3px #8F8F8F;
+	border: 1px solid #ccc;
+	height:500px;
 
+}
+#box
+{  
+	width:8%; 
+	float: left;
+	margin-top:10%; 
+}
+.evaemanager{
+	width:100%; 
+	height:10%; 
+	text-align: center;
+	background:green;
+	color:#FFF;
+	cursor:pointer;
+
+}
+
+#othereva{
+    float:right;
+	width:80%;
+	height:98%; 
+	margin: auto;
+	margin-top:0.5%; 
+	margin-right:10%;
+	overflow-y:auto;
+    /*border: 1px solid green;*/
+}
+
+.ul{
+	background:#ccc;
+	width:100%;
+	margin-top:10px;
+	float:left;
+	
+}
+.li{
+	 /*background: blue;*/
+	width: 10%;
+	float: left;
+	list-style: none;
+	position: relative;
+
+}
+
+
+.othername
+{
+  position: absolute;
+  left:30%;
+  top: 60%;
+  color:red;
+}
+.li2
+{  
+word-wrap:break-word;
+/*color:green;*/
+width: 90%;
+}
+.li img{
+	height:60px; 
+	border-radius:50%;
+}
 #footer{
 	margin-top:10px; 
 	clear:both;

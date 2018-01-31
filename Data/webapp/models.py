@@ -115,11 +115,13 @@ class WebappLoc(models.Model):
 
 class WebappNews(models.Model):
     id = models.IntegerField(primary_key=True)
-    title = models.CharField(max_length=20, blank=True, null=True)
-    content = models.CharField(max_length=100)
+    usr = models.ForeignKey('WebappUsr', models.DO_NOTHING, db_column='usr')
+    title = models.CharField(max_length=500, blank=True, null=True)
+    content = models.CharField(max_length=10000)
+    time=models.IntegerField()
     loc = models.CharField(max_length=30)
     flag=models.IntegerField()
-    usr = models.ForeignKey('WebappUsr', models.DO_NOTHING, db_column='usr')
+   
 
 
 
@@ -154,5 +156,8 @@ class WebappUsr(models.Model):
 class eval(models.Model):
     id=models.IntegerField(primary_key=True)
     usr=models.ForeignKey("WebappUsr",models.DO_NOTHING,db_column="usr")
+    title = models.CharField(max_length=100)
+    content=models.CharField(max_length=5000)
     good=models.IntegerField()
     bad=models.IntegerField()
+    p=models.CharField(max_length=30)

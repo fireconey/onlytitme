@@ -8,6 +8,11 @@ from django.views.decorators.csrf import csrf_exempt
 import os
 import  shutil
 import  webapp.tool as tool
+import threading
+import  time
+import json
+
+
 
 # Create your views here.
 #登录检查标记
@@ -18,9 +23,28 @@ utemp=0
 initimg="static/img/loading.jpg"
 initusr="姓名"
 iniloc="地关村"
+iny=0
+threadnumber=1
+def timedele():
+    global iny,threadnumber
+    tim=time.time()*1000
+    tyu=model.WebappNews.objects.exclude(time__gte=tim)
+    try:
+        tyu.delete()
+    except:
+        print("$$$$","异常")
+    timer=threading.Timer(5,timedele)
+    threadnumber=timer
+    timer.start()
+
+
+
 @csrf_exempt
 def index(request):
-    global  initusr,initimg
+    global  initusr,initimg,threadnumber
+    if threadnumber==1:
+        timer = threading.Timer(2, timedele)
+        timer.start()
     ob="登录"
     rg="注册"
     if flag==0:
@@ -36,7 +60,7 @@ def index(request):
         if rq["tag"]=="fill":
             newsmodel= model.WebappNews
             result=tool.query(newsmodel,int(rq["n"]),int(rq["m"]),rq["local"],rq["flag"],rq["state"])
-            return HttpResponse(str(result.get()))
+            return HttpResponse(json.dumps(result.get()))
         elif rq["tag"]=="qry":
             newsmodel=model.WebappNews
             ob=newsmodel.objects.filter(flag=rq["flag"],loc=rq["local"])[0:15]
@@ -60,7 +84,6 @@ def  regist(request):
     global  flag
     if flag==1:
         return HttpResponseRedirect("index")
-
     dic={}
     initphoto="../static/img/loading.jpg"
     if request.method=="POST":
@@ -271,6 +294,7 @@ def timenewsdetail(request):
     bad="无数据"
     content="无数据"
     phone="无数据"
+    wx="无数据"
     xinyong="无数据"
     ob="登录"
     rg = "注册"
@@ -288,8 +312,8 @@ def timenewsdetail(request):
         title=newsmodel.title
         content=newsmodel.content
         phone=umodel.phone
+        wx=umodel.wx
         img=umodel.img
-        print(img)
         good=evalmodel.good
         bad=evalmodel.bad
         xinyong=float('%.2f' % ((good-bad)*100/(good+bad+1)))
@@ -301,6 +325,7 @@ def timenewsdetail(request):
                     "title":title,
                     "content":content,
                     "phone":phone,
+                    "wx":wx,
                     "img":img,
                     "bad":bad,
                     "good":good,
@@ -348,11 +373,9 @@ def newsList(request):
             return HttpResponse("newslist")
 
         if fro=="newslist":
-            print(fl,"fl",local,"local",tag,"tag")
             count = int(request.POST["count"]) - 1
             ty = tool.query2(newsmodel, 60 * count, 60 * (1 + count), fl, local, tag).get()
-            print(ty)
-            return HttpResponse(str(ty))
+            return HttpResponse(json.dumps(ty))
 
     return render(request,"pages/newslist.html",
                   {"range":range(1,21),
@@ -387,11 +410,20 @@ def newsbackstage(request):
         result=request.POST
         if result["flag"]=="param":
             title = result["title"]
-            news=model.WebappNews.objects.filter(title=title)[0]
-            content=news.content
-            loc=news.loc
-            flag2=news.flag
-            return HttpResponse("newsbackstage")
+            news=model.WebappNews.objects.filter(title=title)[0:1]
+            content=news[0].content
+            loc=news[0].loc
+            flag2=news[0].flag
+    
+        if result["flag"]=="update" and not initusr=="姓名":
+           news=model.WebappNews.objects.filter(title=title)
+           news.update(
+            usr=model.WebappUsr.objects.get(usr=initusr),time=result["time"],
+            flag=result["select"],loc=result["group"],title=result["title"],
+            content=result["content"])
+           title =result["title"]
+           content=result["content"]
+        return HttpResponse("newsbackstage")
     return  render(request,"pages/newsbackstage.html",{
                  "title":title,"content":content,"loc":loc,
                  "flag":flag2,"initusr":initusr,"initimg":initimg,
@@ -401,6 +433,7 @@ def newsbackstage(request):
 
                                         })
 
+@csrf_exempt
 def newsbackstage2(request):
     global flag,initimg,initusr
     ob = "登录"
@@ -413,14 +446,20 @@ def newsbackstage2(request):
     title=""
     content=""
     loc=""
+    if request.method=="POST":
+        result = request.POST
+        if result["flag"]=="save" and not initusr=="姓名":
+                news=model.WebappNews(usr=model.WebappUsr.objects.get(usr=initusr),time=result["time"],
+                flag=result["select"],loc=result["group"],title=result["title"],content=result["content"])
+                news.save()
+                return HttpResponse("newsbackstage2")
     return  render(request,"pages/newsbackstage.html",{
                  "title":title,"content":content,"loc":loc,
                  "flag":flag2,"initusr":initusr,"initimg":initimg,
                  "ob":ob,
                  "rg":rg,
                  "button":"发布"
-
-                                        })
+                 })
 
 
 @csrf_exempt
@@ -470,7 +509,6 @@ def info(request):
                 n=0
                 m=0
             news=news[n:m]
-            print(news,all)
             for i in range(0,news.count()):
                 title.append(news[i].title)
                 # time.append(news[i].time)
@@ -506,6 +544,26 @@ def eval(request):
     if flag==1:
         ob="退出"
         rg = "已登录"
+    if request.method=="POST":
+        result=request.POST
+        if result["flag"]=="fill":
+            title=result["title"]
+            usr=result["usr"]
+            news=model.eval.objects.filter(usr=usr,title=title)
+            all=news.count()
+            name=[]
+            content=[]
+            dic={}
+
+            for i in range(0,all):
+                name.append(news[i].p)
+                content.append(news[i].content)
+            dic["name"]=name
+            dic["content"]=content
+            return  HttpResponse(json.dumps(dic))
+
+
+
     return  render(request,"pages/eval.html",
                    {"ob":ob,
                      "rg":rg
@@ -524,3 +582,6 @@ def t(request):
     m=model.WebappNews.objects.filter(flag="3",loc="*")
     print(m.count(),90000000)
     return  HttpResponse("hao")
+
+
+

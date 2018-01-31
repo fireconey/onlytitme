@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<meta http-equiv="refresh" content="200">
+	<meta http-equiv="refresh" content="100000">
 	<title>Document</title>
 	<script type="text/javascript" src={%static "js/jquery.js"%}></script>
 	<script type="text/javascript" src={%static "js/local.js"%}></script>
@@ -23,7 +23,7 @@
 				</div>
 				<div type="text" id="loc">
 					<select name="select" id="select">
-						<option value="0">自分组</option>
+						<option value="0" selected="selected">自分组</option>
 						<option value="1">县/区级</option>
 						<option value="2">市级</option>
 						<option value="3">省级</option>
@@ -49,9 +49,7 @@
 					</ul>
 				</div>
 			</div>
-			<div id="title" contenteditable="true">
-				{{ title }}
-			</div>
+			<input type="text"  id="title"  value={{ title}}> 
 			<div class="imgsize">
 				<div>请输入尺寸</div>
 				宽<input type="text">px
@@ -59,7 +57,7 @@
 				 <input type="button" value="修改" id="changeimgsize">
 				</div>
 			<div contenteditable="true" id="content" >
-				{{ content }}
+				{{ content|safe }}
 			</div>
 			
 			<div id="button">
