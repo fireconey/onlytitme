@@ -308,7 +308,7 @@ def timenewsdetail(request):
     try:
         newsmodel=model.WebappNews.objects.filter(usr=name,title=title)[0:1][0]
         umodel=model.WebappUsr.objects.get(usr=name)
-        evalmodel=model.eval.objects.get(usr=name)
+        evalmodel=model.eval.objects.filter(usr=name)
         title=newsmodel.title
         content=newsmodel.content
         phone=umodel.phone
@@ -546,20 +546,23 @@ def eval(request):
         rg = "已登录"
     if request.method=="POST":
         result=request.POST
-        if result["flag"]=="fill":
+        if result["flag"]=="fill" and not result["usr"]=="姓名":
             title=result["title"]
             usr=result["usr"]
             news=model.eval.objects.filter(usr=usr,title=title)
             all=news.count()
             name=[]
             content=[]
+            img=[]
             dic={}
 
             for i in range(0,all):
                 name.append(news[i].p)
                 content.append(news[i].content)
+                img.append(news[i].img)
             dic["name"]=name
             dic["content"]=content
+            dic["img"]=img
             return  HttpResponse(json.dumps(dic))
 
 

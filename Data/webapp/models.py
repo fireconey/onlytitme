@@ -156,6 +156,7 @@ class WebappUsr(models.Model):
 class eval(models.Model):
     id=models.IntegerField(primary_key=True)
     usr=models.ForeignKey("WebappUsr",models.DO_NOTHING,db_column="usr")
+    img=models.CharField(max_length=100)
     title = models.CharField(max_length=100)
     content=models.CharField(max_length=5000)
     good=models.IntegerField()

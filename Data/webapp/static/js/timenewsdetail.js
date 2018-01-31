@@ -100,42 +100,48 @@ function bar() {
 
 function filleval()
 {  
-  var name=$("#name").getEl(0)
-  var title=$("title").getEl(0)
+  var name=$("#usr").getEl(0).innerText.replace(/\s+/g,"")
+  var title=$("#title").getEl(0).innerText.replace(/\s+/g,"")
 
 
  $().ajax({
     "type":"post",
-    "url":"timenewsdetail",
+    "url":"eval",
     "data":{"title":title,"usr":name,"flag":"fill"},
     "fn":function(value)
-    {
+    { 
         var li=""
         var ob=$("#othereva").getEl(0)
-
-        
-        var json=JSON.parse(value)
-        for(var i=0;i<json.length;i++)
+        var json=JSON.parse(value.responseText)
+        for(var i=0;i<json["name"].length;i++)
         {
             var ele="<ul class='ul'>"+
                     "<li class='li1 li'>"+
-                        "<img src='"+json["img"]+"' alt='浮动''>"+
-                        "<div class='othername'>"+json["name"]+"</div>"+
+                        "<img src='"+json["img"][i]+"' alt='浮动''>"+
+                        "<div class='othername'>"+json["name"][i]+"</div>"+
                     "</li>"+
                     " <li class='li2 li'>"+
-                    json["content"]
+                    json["content"][i]+
                     "</li>"+
                 "</ul>"
                 li=li+ele
                 
         }
-        ob.innerHTML=li
+        if(json["name"].length!=0)
+        {
+             ob.innerHTML=li
+            var hp=$(".li1 img")
+            all=hp.getEl("all").length
+            for(var j=0;j<all;j++)
+            {
+                hp.getEl(j).style.width=hp.getEl(j).offsetHeight+"px"
+            }
+        }
+       
+        
 
-             
-             
-         
 
-
+            
     }
     })
     
