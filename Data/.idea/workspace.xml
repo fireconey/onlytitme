@@ -26,35 +26,56 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/webapp/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="50">
-              <caret line="306" column="46" lean-forward="true" selection-start-line="306" selection-start-column="46" selection-end-line="306" selection-end-column="46" />
+            <state relative-caret-position="327">
+              <caret line="65" column="0" lean-forward="false" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
-                <element signature="e#537#789#0" expanded="false" />
-                <element signature="e#830#2051#0" expanded="false" />
-                <element signature="e#2093#3948#0" expanded="false" />
-                <element signature="e#3978#5008#0" expanded="false" />
-                <element signature="e#5035#5100#0" expanded="false" />
-                <element signature="e#5198#8159#0" expanded="false" />
-                <element signature="e#9640#11032#0" expanded="false" />
-                <element signature="e#11169#12427#0" expanded="false" />
-                <element signature="e#12475#13384#0" expanded="false" />
-                <element signature="e#13423#13891#0" expanded="false" />
-                <element signature="e#13933#15335#0" expanded="false" />
-                <element signature="e#16289#16335#0" expanded="false" />
+                <element signature="e#2246#4101#0" expanded="false" />
+                <element signature="e#4131#5161#0" expanded="false" />
+                <element signature="e#5188#5253#0" expanded="false" />
+                <element signature="e#11649#12907#0" expanded="false" />
+                <element signature="e#12955#13864#0" expanded="false" />
+                <element signature="e#18031#18077#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="query.py" pinned="false" current-in-tab="false">
-        <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/models/query.py">
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/webapp/static/js/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-161">
-              <caret line="308" column="29" lean-forward="false" selection-start-line="308" selection-start-column="29" selection-end-line="308" selection-end-column="29" />
+            <state relative-caret-position="442">
+              <caret line="46" column="21" lean-forward="true" selection-start-line="46" selection-start-column="21" selection-end-line="46" selection-end-column="21" />
+              <folding>
+                <element signature="e#212#231#0" expanded="false" />
+                <element signature="e#683#772#0" expanded="false" />
+                <element signature="n#!!block;n#changelabel#0" expanded="false" />
+                <element signature="n#!!block;n#showdetail#0" expanded="false" />
+                <element signature="n#!!block;n#tolist#0" expanded="false" />
+                <element signature="n#!!block;n#bar#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="newslist.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/webapp/static/js/newslist.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="89">
+              <caret line="19" column="45" lean-forward="true" selection-start-line="19" selection-start-column="45" selection-end-line="19" selection-end-column="45" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="uinfo.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/webapp/templates/pages/uinfo.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="276">
+              <caret line="42" column="31" lean-forward="false" selection-start-line="42" selection-start-column="25" selection-end-line="42" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -63,8 +84,8 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/webapp/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="292">
-              <caret line="158" column="39" lean-forward="false" selection-start-line="158" selection-start-column="39" selection-end-line="158" selection-end-column="39" />
+            <state relative-caret-position="171">
+              <caret line="121" column="41" lean-forward="false" selection-start-line="121" selection-start-column="41" selection-end-line="121" selection-end-column="41" />
               <folding />
             </state>
           </provider>
@@ -73,7 +94,7 @@
       <file leaf-file-name="head.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/webapp/templates/model/head.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
+            <state relative-caret-position="264">
               <caret line="12" column="21" lean-forward="false" selection-start-line="12" selection-start-column="21" selection-end-line="12" selection-end-column="25" />
               <folding />
             </state>
@@ -83,8 +104,8 @@
       <file leaf-file-name="timenewsdetail.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/webapp/templates/pages/timenewsdetail.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="277">
-              <caret line="42" column="28" lean-forward="false" selection-start-line="42" selection-start-column="28" selection-end-line="42" selection-end-column="28" />
+            <state relative-caret-position="190">
+              <caret line="34" column="47" lean-forward="false" selection-start-line="34" selection-start-column="47" selection-end-line="34" selection-end-column="51" />
               <folding />
             </state>
           </provider>
@@ -93,7 +114,7 @@
       <file leaf-file-name="goodsbackstage.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/webapp/templates/pages/goodsbackstage.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-83">
+            <state relative-caret-position="902">
               <caret line="41" column="11" lean-forward="false" selection-start-line="41" selection-start-column="11" selection-end-line="41" selection-end-column="11" />
               <folding />
             </state>
@@ -103,30 +124,8 @@
       <file leaf-file-name="tool.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/webapp/tool.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="511">
-              <caret line="92" column="10" lean-forward="false" selection-start-line="92" selection-start-column="10" selection-end-line="92" selection-end-column="10" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="timenewsdetail.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/webapp/static/js/timenewsdetail.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-992">
-              <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
-              <folding>
-                <marker date="1517428950129" expanded="true" signature="3719:3721" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="newsbackstage.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/webapp/templates/pages/newsbackstage.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-188">
-              <caret line="25" column="54" lean-forward="false" selection-start-line="25" selection-start-column="54" selection-end-line="25" selection-end-column="54" />
+            <state relative-caret-position="287">
+              <caret line="68" column="40" lean-forward="true" selection-start-line="68" selection-start-column="40" selection-end-line="68" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -167,6 +166,13 @@
       <find>newsli</find>
       <find>alert</find>
       <find>print</find>
+      <find>file</find>
+      <find>eval</find>
+      <find>uinfo</find>
+      <find>update</find>
+      <find>change</find>
+      <find>query</find>
+      <find>tool</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -205,7 +211,6 @@
         <option value="$PROJECT_DIR$/webapp/static/model/style/head.css" />
         <option value="$PROJECT_DIR$/webapp/static/model/js/head.js" />
         <option value="$PROJECT_DIR$/webapp/templates/model/head.html" />
-        <option value="$PROJECT_DIR$/webapp/static/js/timenewsdetail.js" />
         <option value="$PROJECT_DIR$/webapp/static/style/datainfo.css" />
         <option value="$PROJECT_DIR$/webapp/templates/pages/info.html" />
         <option value="$PROJECT_DIR$/webapp/templates/pages/uinfo.html" />
@@ -216,13 +221,14 @@
         <option value="$PROJECT_DIR$/webapp/static/js/jquery.js" />
         <option value="$PROJECT_DIR$/webapp/static/style/newsbackstage.css" />
         <option value="$PROJECT_DIR$/webapp/templates/model/indexdata.html" />
-        <option value="$PROJECT_DIR$/webapp/static/js/index.js" />
         <option value="$PROJECT_DIR$/webapp/static/js/datainfo.js" />
-        <option value="$PROJECT_DIR$/webapp/tool.py" />
-        <option value="$PROJECT_DIR$/webapp/static/js/newslist.js" />
         <option value="$PROJECT_DIR$/webapp/templates/pages/timenewsdetail.html" />
         <option value="$PROJECT_DIR$/webapp/models.py" />
+        <option value="$PROJECT_DIR$/webapp/static/js/timenewsdetail.js" />
         <option value="$PROJECT_DIR$/webapp/views.py" />
+        <option value="$PROJECT_DIR$/webapp/static/js/index.js" />
+        <option value="$PROJECT_DIR$/webapp/tool.py" />
+        <option value="$PROJECT_DIR$/webapp/static/js/newslist.js" />
       </list>
     </option>
   </component>
@@ -233,10 +239,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="262" />
-    <option name="y" value="160" />
+    <option name="x" value="57" />
+    <option name="y" value="88" />
     <option name="width" value="1122" />
-    <option name="height" value="719" />
+    <option name="height" value="751" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -416,16 +422,16 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="262" y="160" width="1122" height="719" extended-state="0" />
+    <frame x="57" y="88" width="1122" height="751" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32901135" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30470017" sideWeight="0.5037594" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32931036" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27083334" sideWeight="0.49624062" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25762194" sideWeight="0.49624062" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30448717" sideWeight="0.49624062" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30277777" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21851853" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16696589" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="SciView" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -473,7 +479,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="15" />
+      <option name="time" value="17" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -578,13 +584,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/webapp/static/js/uinfo.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="9" column="1" lean-forward="true" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/webapp/static/style/timenewsdetail.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="358">
@@ -670,21 +669,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/webapp/templates/pages/uinfo.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="748">
-          <caret line="34" column="35" lean-forward="false" selection-start-line="34" selection-start-column="35" selection-end-line="34" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/webapp/static/js/newsbackstage.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3102">
           <caret line="141" column="0" lean-forward="false" selection-start-line="141" selection-start-column="0" selection-end-line="141" selection-end-column="0" />
-          <folding>
-            <marker date="1517414951683" expanded="true" signature="5990:5992" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -700,7 +688,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="66" column="16" lean-forward="false" selection-start-line="66" selection-start-column="16" selection-end-line="66" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -733,14 +720,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/webapp/static/js/newslist.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="431">
-          <caret line="44" column="59" lean-forward="true" selection-start-line="44" selection-start-column="59" selection-end-line="44" selection-end-column="59" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/webapp/templates/model/colorpicker.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="252">
@@ -753,7 +732,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="140">
           <caret line="127" column="0" lean-forward="false" selection-start-line="127" selection-start-column="0" selection-end-line="127" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -761,22 +739,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="137" column="22" lean-forward="true" selection-start-line="137" selection-start-column="22" selection-end-line="137" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webapp/static/js/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="88" column="5" lean-forward="true" selection-start-line="88" selection-start-column="5" selection-end-line="88" selection-end-column="5" />
-          <folding>
-            <element signature="e#155#174#0" expanded="false" />
-            <element signature="e#626#715#0" expanded="false" />
-            <element signature="n#!!block;n#changelabel#0" expanded="false" />
-            <element signature="n#!!block;n#showdetail#0" expanded="false" />
-            <element signature="n#!!block;n#tolist#0" expanded="false" />
-            <element signature="n#!!block;n#bar#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -790,7 +752,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/webapp/templates/pages/newsbackstage.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-188">
+        <state relative-caret-position="550">
           <caret line="25" column="54" lean-forward="false" selection-start-line="25" selection-start-column="54" selection-end-line="25" selection-end-column="54" />
           <folding />
         </state>
@@ -798,7 +760,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/webapp/templates/pages/goodsbackstage.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-83">
+        <state relative-caret-position="902">
           <caret line="41" column="11" lean-forward="false" selection-start-line="41" selection-start-column="11" selection-end-line="41" selection-end-column="11" />
           <folding />
         </state>
@@ -806,73 +768,104 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/webapp/templates/model/head.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
+        <state relative-caret-position="264">
           <caret line="12" column="21" lean-forward="false" selection-start-line="12" selection-start-column="21" selection-end-line="12" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webapp/static/js/timenewsdetail.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-992">
-          <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
-          <folding>
-            <marker date="1517428950129" expanded="true" signature="3719:3721" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webapp/templates/pages/timenewsdetail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="42" column="28" lean-forward="false" selection-start-line="42" selection-start-column="28" selection-end-line="42" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webapp/tool.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="511">
-          <caret line="92" column="10" lean-forward="false" selection-start-line="92" selection-start-column="10" selection-end-line="92" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/models/query.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-161">
-          <caret line="308" column="29" lean-forward="false" selection-start-line="308" selection-start-column="29" selection-end-line="308" selection-end-column="29" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/webapp/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="292">
-          <caret line="158" column="39" lean-forward="false" selection-start-line="158" selection-start-column="39" selection-end-line="158" selection-end-column="39" />
+        <state relative-caret-position="171">
+          <caret line="121" column="41" lean-forward="false" selection-start-line="121" selection-start-column="41" selection-end-line="121" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webapp/templates/pages/timenewsdetail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="34" column="47" lean-forward="false" selection-start-line="34" selection-start-column="47" selection-end-line="34" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webapp/static/js/timenewsdetail.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="122">
+          <caret line="38" column="29" lean-forward="false" selection-start-line="38" selection-start-column="28" selection-end-line="38" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webapp/static/js/uinfo.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3300">
+          <caret line="150" column="32" lean-forward="false" selection-start-line="150" selection-start-column="24" selection-end-line="150" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.6/lib/python3.6/site-packages/django/db/models/query.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="308" column="29" lean-forward="false" selection-start-line="308" selection-start-column="29" selection-end-line="308" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webapp/templates/pages/uinfo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="42" column="31" lean-forward="false" selection-start-line="42" selection-start-column="25" selection-end-line="42" selection-end-column="31" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/webapp/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="50">
-          <caret line="306" column="46" lean-forward="true" selection-start-line="306" selection-start-column="46" selection-end-line="306" selection-end-column="46" />
+        <state relative-caret-position="327">
+          <caret line="65" column="0" lean-forward="false" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
-            <element signature="e#537#789#0" expanded="false" />
-            <element signature="e#830#2051#0" expanded="false" />
-            <element signature="e#2093#3948#0" expanded="false" />
-            <element signature="e#3978#5008#0" expanded="false" />
-            <element signature="e#5035#5100#0" expanded="false" />
-            <element signature="e#5198#8159#0" expanded="false" />
-            <element signature="e#9640#11032#0" expanded="false" />
-            <element signature="e#11169#12427#0" expanded="false" />
-            <element signature="e#12475#13384#0" expanded="false" />
-            <element signature="e#13423#13891#0" expanded="false" />
-            <element signature="e#13933#15335#0" expanded="false" />
-            <element signature="e#16289#16335#0" expanded="false" />
+            <element signature="e#2246#4101#0" expanded="false" />
+            <element signature="e#4131#5161#0" expanded="false" />
+            <element signature="e#5188#5253#0" expanded="false" />
+            <element signature="e#11649#12907#0" expanded="false" />
+            <element signature="e#12955#13864#0" expanded="false" />
+            <element signature="e#18031#18077#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webapp/tool.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="287">
+          <caret line="68" column="40" lean-forward="true" selection-start-line="68" selection-start-column="40" selection-end-line="68" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webapp/static/js/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="46" column="21" lean-forward="true" selection-start-line="46" selection-start-column="21" selection-end-line="46" selection-end-column="21" />
+          <folding>
+            <element signature="e#212#231#0" expanded="false" />
+            <element signature="e#683#772#0" expanded="false" />
+            <element signature="n#!!block;n#changelabel#0" expanded="false" />
+            <element signature="n#!!block;n#showdetail#0" expanded="false" />
+            <element signature="n#!!block;n#tolist#0" expanded="false" />
+            <element signature="n#!!block;n#bar#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webapp/static/js/newslist.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="89">
+          <caret line="19" column="45" lean-forward="true" selection-start-line="19" selection-start-column="45" selection-end-line="19" selection-end-column="45" />
+          <folding />
         </state>
       </provider>
     </entry>

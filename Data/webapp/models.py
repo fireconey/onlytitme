@@ -159,6 +159,5 @@ class eval(models.Model):
     img=models.CharField(max_length=100)
     title = models.CharField(max_length=100)
     content=models.CharField(max_length=5000)
-    good=models.IntegerField()
-    bad=models.IntegerField()
+    evaluate=models.IntegerField()
     p=models.CharField(max_length=30)

@@ -43,32 +43,47 @@ local：表示要查询的地区
 def query(model,n,m,local,fl,state):
     global pack ,img ,content,loc,usr,flag,title
     img=[]
-    ob=0
-    mutex.acquire()
+    ob = 0
+    def baoz(n1,n2,n3,n4):
+        mutex.acquire()
+        for i in range(n1, n2):
+            u = ob[i].usr.usr
+            img.append(model2.WebappUsr.objects.get(usr=u).img)
+            title.append(ob[i].title)
+            content.append(ob[i].content)
+            usr.append(ob[i].usr.usr)
+
+        for i in range(n3, n4):
+            img.append("空")
+            title.append("无数据")
+            content.append("无数据")
+            usr.append("空")
+        pack.clear()
+        pack.set(img, "img")
+        pack.set(title, "title")
+        pack.set(content, "content")
+        pack.set(usr, "usr")
+        mutex.release()
     clear()
     if state=="1":
+        ob=model.objects.filter(flag=fl)
+        number=ob.count()
+        if number>(m-n):
+            ob=ob[number-(m-n):number]
+            baoz(0,15,0,0)
+        if number<(m-n):
+            ob=ob[0:number]
+            baoz(0,number,number,(m-n))
 
-        ob=model.objects.filter(flag=fl)[n:m]
     if state=="2":
-        ob = model.objects.filter(flag=fl,loc=local)[n:m]
-
-    number=ob.count()
-    for i in range(0, number):
-        img.append(model2.WebappUsr.objects.get(usr=ob[i].usr.usr).img)
-        title.append(ob[i].title)
-        content.append(ob[i].content)
-        usr.append(ob[i].usr.usr)
-    for i in range(number,m):
-        img.append("空")
-        title.append("无数据")
-        content.append("无数据")
-        usr.append("空")
-    pack.clear()
-    pack.set(img, "img")
-    pack.set(title,"title")
-    pack.set(content, "content")
-    pack.set(usr, "usr")
-    mutex.release()
+        ob = model.objects.filter(flag=fl,loc=local)
+        number = ob.count()
+        if number > (m - n):
+            ob = ob[number - (m - n):number]
+            baoz(0, (m - n), 0, 0)
+        if number < (m - n):
+            ob = ob[0:m - n]
+            baoz(0, number, number, (m - n))
     return pack
 
 

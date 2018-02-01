@@ -29,7 +29,11 @@ def timedele():
     global iny,threadnumber
     tim=time.time()*1000
     tyu=model.WebappNews.objects.exclude(time__gte=tim)
+    all=tyu.count()
     try:
+        for i in range(0,all):
+            nes=model.eval.objects.filter(usr=tyu[i].usr,title=tyu[i].title)
+            nes.delete()
         tyu.delete()
     except:
         print("$$$$","异常")
@@ -213,9 +217,15 @@ def userInfo(request):
             print("没有文件上传")
         if data["flag"]=="up":
             ob = model.WebappUsr.objects.get(usr=utemp)
+            ev=model.eval.objects.filter(p=utemp)
+
+
             ob.img = "static/"+data["usr"]+"/"+file.name
             initimg = "static/"+data["usr"]+"/"+file.name
             ob.save()
+            ev.update(img="static/" + data["usr"] + "/" + file.name)
+
+
 
             try:
                 shutil.rmtree("webapp/static/"+data["usr"])
@@ -230,6 +240,7 @@ def userInfo(request):
 
         if  data["flag"]=="change":
             ob = model.WebappUsr.objects.get(usr=utemp)
+            ev=model.eval.objects.filter(p=utemp)
             uform = form.uinfo(data)
             if uform.is_valid():
                 ob.usr=data["usr"]
@@ -239,6 +250,8 @@ def userInfo(request):
                 ob.wx=data["wx"]
                 ob.phone=data["phone"]
                 ob.loc=data["loc"]
+                ob.img="static/"+data["usr"]+"/"+ob.img.split("/")[-1]
+                ev.update(img=ob.img)
                 initusr=ob.usr
                 initimg=ob.img
                 try:
@@ -314,8 +327,8 @@ def timenewsdetail(request):
         phone=umodel.phone
         wx=umodel.wx
         img=umodel.img
-        good=evalmodel.good
-        bad=evalmodel.bad
+        good=evalmodel.filter(evaluate=1).count()
+        bad=evalmodel.filter(evaluate=0).count()
         xinyong=float('%.2f' % ((good-bad)*100/(good+bad+1)))
     except:
         pass
@@ -564,6 +577,45 @@ def eval(request):
             dic["content"]=content
             dic["img"]=img
             return  HttpResponse(json.dumps(dic))
+
+        def goodbad(value):
+            title=result["title"]
+            usr=result["usr"]
+            news=model.eval.objects.filter(usr=usr,title=title,evaluate=value)
+            all=news.count()
+            name=[]
+            content=[]
+            img=[]
+            dic={}
+            for i in range(0,all):
+                name.append(news[i].p)
+                content.append(news[i].content)
+                img.append(news[i].img)
+            dic["name"]=name
+            dic["content"]=content
+            dic["img"]=img
+            return HttpResponse(json.dumps(dic))
+
+        if result["flag"]=="good" and not result["usr"]=="姓名":
+           return goodbad(1)
+
+        if result["flag"]=="bad" and not result["usr"]=="姓名": 
+           return goodbad(0)    
+        if result["flag"]=="save" and not result["usr"]=="姓名":
+            p=result["p"]
+            name=result["usr"]
+            title=result["title"]
+            content=result["content"]
+            score=result["score"]
+            img=result["img"]
+            umoel=model.WebappUsr.objects.get(usr=name)
+            ev=model.eval(img=img,title=title,content=content,evaluate=score,p=p,usr=umoel)
+            ev.save()
+            return HttpResponse("OK")
+
+            
+        
+
 
 
 

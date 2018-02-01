@@ -3,6 +3,8 @@ window.onload = function () {
     img()
     bar()
     filleval()
+    eval()
+   
 
 }
 
@@ -19,7 +21,7 @@ function initbody() {
     var headp = document.getElementById("headp")
     var img2=document.getElementById("img2")
     headp.style.width = headp.offsetHeight + "px"
-    // img2.style.width = img2.offsetHeight + "px"
+    img2.style.width = img2.offsetHeight + "px"
 }
 
 function img() {
@@ -103,7 +105,6 @@ function filleval()
   var name=$("#usr").getEl(0).innerText.replace(/\s+/g,"")
   var title=$("#title").getEl(0).innerText.replace(/\s+/g,"")
 
-
  $().ajax({
     "type":"post",
     "url":"eval",
@@ -136,14 +137,153 @@ function filleval()
             {
                 hp.getEl(j).style.width=hp.getEl(j).offsetHeight+"px"
             }
-        }
-       
-        
-
-
-            
+        }     
     }
     })
+}
+
+
+function eval()
+{
+    var box=$("#box .evamanager")
+    var usrob=$("#usr").getEl(0)
+    var titleob=$("#title").getEl(0)
+    var toeval=$("#toeval")
+    var othereva=$("#othereva")
+    var ob=$("#toeval")
+    box.getEl(0).onclick=function()
+    {
+        toeval.css("display:block")
+        othereva.css("display:none")
+        evaledit()
+    }
+
+    box.getEl(1).onclick=function()
+    {   
+        ob.css("display:none")
+       othereva.css("display:block")
+       model("good")
+      
+    }
+
+    box.getEl(2).onclick=function()
+    {
+        ob.css("display:none")
+        othereva.css("display:block")
+        model("bad")
+        
+    }
+    box.getEl(3).onclick=function()
+    {
+        ob.css("display:none")
+        othereva.css("display:block")
+        filleval()
+
+    }
+
+
+
+    function model(flag)
+    {
+       var usr=usrob.innerText.replace(/\s+/g,"")
+       var title=titleob.innerText.replace(/\s+/g,"")
+        var li=""
+        var ob=$("#othereva").getEl(0)
+        $().ajax({
+            "type":"post",
+            "url":"eval",
+            "data":{"usr":usr,"title":title,"flag":flag},
+            "fn":function(value)
+            {
+                var result=value.responseText
+                var json=JSON.parse(result)
+
+                for(var i=0;i<json["name"].length;i++)
+                {
+                    var ele="<ul class='ul'>"+
+                            "<li class='li1 li'>"+
+                                "<img src='"+json["img"][i]+"' alt='浮动''>"+
+                                "<div class='othername'>"+json["name"][i]+"</div>"+
+                            "</li>"+
+                            " <li class='li2 li'>"+
+                            json["content"][i]+
+                            "</li>"+
+                        "</ul>"
+                        li=li+ele
+                
+                }
+                if(json["name"].length!=0)
+                {
+                     ob.innerHTML=li
+                    var hp=$(".li1 img")
+                    all=hp.getEl("all").length
+                    for(var j=0;j<all;j++)
+                    {
+                        hp.getEl(j).style.width=hp.getEl(j).offsetHeight+"px"
+                    }
+                }   
+
+            }
+        })
+    }
+}
+
+
+/*
+评论编辑的功能
+*/
+function evaledit()
+{   
+    var ob=$("#toeval")
+    var ob1=$("#othereva")
+    var actionob=$(".action")
     
-    
+    actionob.getEl(1).onclick=function()
+    {
+       ob.css("display:none")
+       ob1.css("display:block")
+    }
+    actionob.getEl(0).onclick=function()
+    {
+        
+        var scoreob=$("#score input")
+        var score=""
+         for(var i=0;i<2;i++)
+        {  
+            if(scoreob.getEl(i).checked==true)
+            {
+                score=scoreob.getEl(i).value
+            }
+         }
+
+
+
+        var title=$("#title").getEl(0).innerText.replace(/\s+/g,"")
+        var p=$("#name").getEl(0).innerText.replace(/\s+/g,"")
+        var img=$("#headp").getEl(0).src
+        var name=$("#usr").getEl(0).innerText.replace(/\s+/g,"")
+        var content=$("#text").getEl(0).value
+        
+       
+        if(p=="姓名")
+        {
+            alert("请先登录")
+        }
+        else
+        {
+            $().ajax({
+            "type":"post",
+            "url":"eval",
+            "data":{"img":img,"p":p,"title":title,"usr":name,"score":score,"content":content,"flag":"save"},
+            "fn":function(value)
+            {  
+                $("#text").getEl(0).value=""
+            }
+        })
+        }
+
+       
+        
+    }
+
 }

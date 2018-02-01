@@ -34,12 +34,12 @@
             <div id="otherinfo">
                 <img src={{ img }} alt="空" id="img2">
                 <div id="usrxy">
-                   <div id="usr">{{ name }}</div>
-                   <div>好评{{ good }}/差评{{ bad }}</div>
-                   <div>信用{{xinyong}}</div>
-               </div>
-           </div>
-           <div id="usrinfo">
+                 <div id="usr">{{ name }}</div>
+                 <div>好评{{ good }}/差评{{ bad }}</div>
+                 <div>信用{{xinyong}}</div>
+             </div>
+         </div>
+         <div id="usrinfo">
             <div id="title">
                 {{ title }}
             </div>
@@ -54,20 +54,31 @@
 
     <div id="eva">
         <div id="box">
-            <div class="evaemanager"> 评论 </div>
-            <div class="evaemanager">好评</div>
-            <div class="evaemanager">差评</div>
+            <div class="evamanager"> 评论 </div>
+            <div class="evamanager">好评</div>
+            <div class="evamanager">差评</div>
+            <div class="evamanager">全部</div>
         </div>
         
         <div id="othereva">
-         <ul class="ul">
+           <ul class="ul">
             <li class="li1 li"><img src="static/img/loading.jpg" alt="浮动">
-            <div class="othername">th</div>
+                <div class="othername">th</div>
             </li>
             <li class="li2 li">
                 ****************************************************************************************************
             </li>
         </ul>
+    </div>
+    <div id="toeval">
+       <textarea name="text" id="text" cols="30" rows="10"></textarea>
+       <div id="score">
+        好评<input type="radio" name="radio" value=1 checked="checked">
+        差评<input type="radio" name="radio" value=0>
+       </div>
+         <div class="action">提交</div>
+        <div class="action">取消</div>
+       
     </div>
 </div>
 

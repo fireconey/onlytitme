@@ -18,8 +18,12 @@ function initbody(){
 	    hg.style.height=hg.offsetWidth+"px"
 	var img=document.getElementById("headp");
 	    img.style.width=img.offsetHeight+"px"
-	var headimg=$(".headimg").getEl(0)
-	    headimg.style.width=headimg.offsetHeight+"px"
+	var headimg=$(".headimg")
+	for(var i=0;i<60;i++)
+	{
+		headimg.getEl(i).style.width=headimg.getEl(i).offsetHeight+"px"
+	}
+
 
 
 }
