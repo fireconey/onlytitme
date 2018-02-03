@@ -44,10 +44,11 @@ def timedele():
     tyu=model.WebappNews.objects.exclude(time__gte=tim)
     all=tyu.count()
     try:
+        tyu.delete()
         for i in range(0,all):
             nes=model.eval.objects.filter(usr=tyu[i].usr,title=tyu[i].title)
             nes.delete()
-        tyu.delete()
+
     except:
         print("$$$$","异常")
     timer=threading.Timer(5,timedele)
@@ -77,7 +78,7 @@ def index(request):
     if flag=="in":
         ob="退出"
         rg="已登录"
-    if flag=="out" or flag==None:
+    if flag=="out" or flag=="":
         ob="登录"
         initimg = "static/img/loading.jpg"
         initusr = "姓名"
@@ -242,6 +243,10 @@ def userInfo(request):
     phone=""
     loc=""
     img=""
+    good=0
+    bad=0
+    xinyong=0
+
 
     if request.method=="POST":
         data=request.POST
@@ -258,7 +263,7 @@ def userInfo(request):
             ev.update(img="static/" + data["usr"] + "/" + file.name)
 
             try:
-                shutil.rmtree("webapp/static/"+data["usr"])
+                shutil.rmtree("webapp/static/"+data["usr"]+"/")
             except:
                 print("没有这个目录")
             if not os.path.exists("webapp/static/"+data["usr"]):
@@ -273,7 +278,9 @@ def userInfo(request):
         if  data["flag"]=="change":
             ob = model.WebappUsr.objects.get(usr=initusr)
             ev=model.eval.objects.filter(p=initusr)
-            uform = form.uinfo(data)
+            priceev=model.personeval.objects.filter(usr=initusr)
+            news=model.WebappNews.objects.filter(usr=initusr)
+            uform = form.uinfo(data,)
             if uform.is_valid():
                 ob.usr=data["usr"]
                 ob.sex=data["sex"]
@@ -283,7 +290,12 @@ def userInfo(request):
                 ob.phone=data["phone"]
                 ob.loc=data["loc"]
                 ob.img="static/"+data["usr"]+"/"+ob.img.split("/")[-1]
-                ev.update(img=ob.img)
+                ob.save()
+                ev.update(img=ob.img,usr=model.WebappUsr.objects.get(usr=data["usr"]))
+                news.update(usr=model.WebappUsr.objects.get(usr=data["usr"]))
+                priceev.update(usr=model.WebappUsr.objects.get(usr=data["usr"]))
+
+
                 try:
                     shutil.move("webapp/static/"+initusr,"webapp/static/"+data["usr"])
                 except:
@@ -302,7 +314,11 @@ def userInfo(request):
 
 
     try:
-        query = query.objects.get(usr=initusr)
+        query = query.objects.filter(usr=initusr)[0]
+        eval=model.personeval.objects.filter(usr=initusr)[0]
+        good=eval.goodperson
+        bad=eval.badperson
+        xinyong=float("%.2f" %((good-bad)*100/(good+bad+1)))
         usr = query.usr
         sex = query.sex
         if int(sex)==0:
@@ -327,7 +343,10 @@ def userInfo(request):
                     "wx":wx,
                     "phone":phone,
                     "loc":loc,
-                    "img":img
+                    "img":img,
+                    "good":good,
+                    "bad":bad,
+                    "xinyong":xinyong
                    })
 @csrf_exempt
 def timenewsdetail(request):
@@ -345,6 +364,9 @@ def timenewsdetail(request):
     img="#"
     good="无数据"
     bad="无数据"
+    goodperson="无数据"
+    badperson="无数据"
+    personxy="无数据"
     content="无数据"
     phone="无数据"
     wx="无数据"
@@ -359,6 +381,11 @@ def timenewsdetail(request):
         newsmodel=model.WebappNews.objects.filter(usr=name,title=title)[0:1][0]
         umodel=model.WebappUsr.objects.get(usr=name)
         evalmodel=model.eval.objects.filter(usr=name)
+        perpri=model.personeval.objects.get(usr=name)
+
+        goodperson=perpri.goodperson
+        badperson=perpri.badperson
+
         title=newsmodel.title
         content=newsmodel.content
         phone=umodel.phone
@@ -366,7 +393,10 @@ def timenewsdetail(request):
         img=umodel.img
         good=evalmodel.filter(evaluate=1).count()
         bad=evalmodel.filter(evaluate=0).count()
+
+
         xinyong=float('%.2f' % ((good-bad)*100/(good+bad+1)))
+        personxy=float("%.2f" % ((goodperson-badperson)*100/(goodperson+badperson+1)))
     except:
         pass
 
@@ -384,6 +414,9 @@ def timenewsdetail(request):
                     "name":name,
                     "initimg":initimg,
                     "initusr":initusr,
+                    "goodperson":goodperson,
+                    "badperson":badperson,
+                    "personxy":personxy
                    })
 
 
@@ -468,7 +501,9 @@ def newsList(request):
 
 
 
-
+"""
+后台
+"""
 @csrf_exempt
 def newsbackstage(request):
     ob="登录"
@@ -679,8 +714,23 @@ def eval(request):
             score=result["score"]
             img=result["img"]
             umoel=model.WebappUsr.objects.get(usr=name)
+            personprice=model.personeval.objects.filter(usr=name)
+
             ev=model.eval(img=img,title=title,content=content,evaluate=score,p=p,usr=umoel)
             ev.save()
+            if personprice.count() == 0:
+                if score==1:
+                    model.personeval(usr=umoel, goodperson=score,badperson=0).save()
+                else:model.personeval(usr=umoel, goodperson=0,badperson=score).save()
+            else:
+                if int(score)==1:
+                    good=personprice[0].goodperson+int(score)
+                    personprice.update(goodperson=good)
+                if int(score)==0:
+                    bad=personprice[0].badperson+1
+                    personprice.update(badperson=bad)
+
+
             return HttpResponse("OK")
 
             

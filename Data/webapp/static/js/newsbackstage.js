@@ -1,11 +1,15 @@
 window.onload=function(){
-	initbody()
 	bar()
 	textedite()
-  submite()
-  contentimgsize()
+    submite()
+    contentimgsize()
+    initbody()
+    head()
+}
 
-
+window.onresize=function()
+{
+    initbody()
 }
 
 function loadLocal(){
@@ -31,9 +35,11 @@ function initbody(){
 	}
 
 
-	var headp = document.getElementById("headp")
-  headp.style.width = headp.offsetHeight + "px"
 
+
+    var container=$("#container").getEl(0)
+        w=container.offsetWidth
+        container.style.height=w/0.6614786+"px"
 
 }
 

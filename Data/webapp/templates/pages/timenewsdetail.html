@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- <meta http-equiv="refresh" content="3"> -->
+{#    <meta http-equiv="refresh" content="3">#}
     <link rel="stylesheet" href={% static "style/timenewsdetail.css" %}>
     <script src={% static "js/jquery.js" %}></script>
     <script type="text/javascript" src={% static "js/timenewsdetail.js" %}></script>
@@ -32,9 +32,14 @@
         </header>
         <div id="content">
             <div id="otherinfo">
+                <div class="usrxy" id="person">
+                 <div id="usr" class="usrname" >{{ name }}</div>
+                 <div>好评{{ goodperson }}/差评{{ badperson }}</div>
+                 <div>信用{{personxy}}</div>
+             </div>
                 <img src={{ img }} alt="空" id="img2">
-                <div id="usrxy">
-                 <div id="usr">{{ name }}</div>
+                <div class="usrxy">
+                 <div id="usr" class="usrname">{{ title }}</div>
                  <div>好评{{ good }}/差评{{ bad }}</div>
                  <div>信用{{xinyong}}</div>
              </div>

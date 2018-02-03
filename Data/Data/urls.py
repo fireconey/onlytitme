@@ -16,7 +16,6 @@ Including another URLconf
 from django.contrib import admin
 from django.conf.urls import url
 from webapp import views  as view
-
 urlpatterns = {
     url('admin/', admin.site.urls),
     url("^index$", view.index),
@@ -25,7 +24,7 @@ urlpatterns = {
     url("^userInfo$",view.userInfo),
     url("^info$",view.info),
     url("^quite$",view.quite),
-    # url("^eval$",view.eval),
+    url("^eval$",view.eval),
     url("^$",view.index),
     url("^newslist$",view.newsList),
     url("^file$",view.file),

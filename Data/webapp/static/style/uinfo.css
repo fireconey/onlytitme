@@ -87,7 +87,8 @@ background-color: rgba(211,211,211,0.5);
 /************------内容开始-------**************/
 
 #content{
-
+	position: relative;
+ 	border: 1px solid #CCC;
 	width: 100%;
 	height:56.1%;
 	margin-top: 1%;
@@ -101,28 +102,57 @@ background-color: rgba(211,211,211,0.5);
 }
 
 #toback{
-	margin-top:15%;
+	margin-top:30%;
 	float: left;
 	width:10%;
 	height:40%;
-	background:yellow;
-
 }
 #toback a{
 	text-decoration: none;
 	margin-top:2%;
 	display: block;
 	width: 100%;
-	height: 10%;
+	height: 15%;
 	color:#FFF;
+	padding-top:6%;
 	background: green;
 
 }
 #content #im{
-	width:10%;  
-	margin:auto;
+position: absolute;
+	left:45% ;
+	top:1px ;
+	width:10%;
 	border-radius:50% 
 	/*background: yellow;*/
+}
+
+#xinyong {
+	width: 100%;
+	height: 11.5%;
+	margin-top: 1%;
+	background: green;
+
+}
+#xinyong .pricename{
+	color:red;
+	float: left;
+	padding-top:3%;
+	text-align:center;
+	font-size: 1.2em;
+	width:6%;
+	height: 100%;
+	margin-left:5%;
+	background:yellow;
+}
+#xinyong #pricebox{
+	float: left;
+	width:20% ;
+	padding-left:2%;
+	height:100%;
+	background: #CCC;
+	color:green;
+
 }
 #im #file{
 	display: none;
@@ -130,7 +160,8 @@ background-color: rgba(211,211,211,0.5);
 
 #im img{
 	width:100%;
-	height:100%; 
+	height:100%;
+	border:1px solid #CCC;
 	border-radius:50%;
 
 }
@@ -144,21 +175,13 @@ background-color: rgba(211,211,211,0.5);
 	height:100%; 
 	border-radius:50%;
 }
-#ldinfoim{
-	width:10%;
-	height:4%; 
-	color:green;
-	text-align: center;
-	margin:auto;
-	
 
-}
 #content #fo{
 	display: block;
 	/*background-color: rgba(34,139,34,1);*/
 	border-top:1px solid green;
 	margin:auto;
-	margin-top:1%;
+	margin-top:5%;
 	width: 40%;
 	height:70%;
 	padding-right:3%; 

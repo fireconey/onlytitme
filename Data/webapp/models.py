@@ -161,3 +161,10 @@ class eval(models.Model):
     content=models.CharField(max_length=5000)
     evaluate=models.IntegerField()
     p=models.CharField(max_length=30)
+
+class personeval(models.Model):
+    id=models.IntegerField(primary_key=True)
+    usr=models.ForeignKey("WebappUsr",models.DO_NOTHING,db_column="usr")
+    goodperson=models.IntegerField()
+    badperson=models.IntegerField()
+

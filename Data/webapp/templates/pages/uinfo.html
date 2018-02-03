@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    {#	<meta http-equiv="refresh" content="2000">#}
+{#    	<meta http-equiv="refresh" content="2">#}
     <title>ldinfo</title>
     <script src={%static "js/jquery.js"%}></script>
     <script src={% static "js/uinfo.js" %}></script>
@@ -30,19 +30,25 @@
     </header>
     <section id="content">
         <div id="toback">
-            <a href="eval">信用评级</a>
             <a href="info">消息管理</a>
             <a href="newsbackstage">消息发布</a>
         </div>
+        <div id="xinyong" >
+                <div class="pricename">{{ usr }}</div>
+            <div id="pricebox">
+                <div class="price">好评{{ good }}</div>
+                <div class="price">差评{{ bad }}</div>
+                <div class="price">信用{{ xinyong }}</div>
+            </div>
 
-
+        </div>
         <div id="im">
             {% csrf_token %}
             <input type="file" name="file" id="file">
             <img src={{ img }} alt="头像" id="photo">
             <input type="submit" value="修改" name="修改" id="submit">
         </div>
-        <div id="ldinfoim">{{ usr }}</div>
+
         <div method="post" id="fo">
             {% csrf_token %}
             <div>
