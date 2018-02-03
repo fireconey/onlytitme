@@ -5,6 +5,7 @@ from django.http import HttpResponseRedirect
 from .forms import Loading as ldform
 from . import forms as form
 from django.views.decorators.csrf import csrf_exempt
+from urllib import  parse
 import os
 import  shutil
 import  webapp.tool as tool
@@ -18,13 +19,25 @@ import json
 #登录检查标记
 
 '''以下为已经开发好了的'''
-flag=0
-utemp=0
-initimg="static/img/loading.jpg"
-initusr="姓名"
-iniloc="地关村"
-iny=0
 threadnumber=1
+
+# flag=0
+# utemp=0
+# initimg="static/img/loading.jpg"
+# initusr="姓名"
+# iniloc="地关村"
+# iny=0
+#
+# fl=0
+# local=0
+# tag=0
+# title=""
+# content=""
+# loc=""
+# flag2=""
+# title=0
+# name=0
+
 def timedele():
     global iny,threadnumber
     tim=time.time()*1000
@@ -45,19 +58,29 @@ def timedele():
 
 @csrf_exempt
 def index(request):
-    global  initusr,initimg,threadnumber
+    global  threadnumber
+    ob = "登录"
+    rg = "注册"
+
     if threadnumber==1:
         timer = threading.Timer(2, timedele)
         timer.start()
-    ob="登录"
-    rg="注册"
-    if flag==0:
+
+#从cookie中知道用户的名称和头像及是否登录
+    initusr=tool.chinese(request.COOKIES.get("_initusr"))
+    initimg=tool.chinese(request.COOKIES.get("_initimg"))
+    flag=tool.chinese(request.COOKIES.get("_flag"))
+    if initusr=="":
+        initusr="姓名"
+    if initimg=="":
+        initimg="static/img/loading.jpg"
+    if flag=="in":
+        ob="退出"
+        rg="已登录"
+    if flag=="out" or flag==None:
         ob="登录"
         initimg = "static/img/loading.jpg"
         initusr = "姓名"
-    if flag==1:
-        ob="退出"
-        rg="已登录"
 
     if request.method=="POST":
         rq=request.POST
@@ -85,11 +108,12 @@ def index(request):
 
 @csrf_exempt
 def  regist(request):
-    global  flag
-    if flag==1:
+    flag=tool.chinese(request.COOKIES.get("_flag"))
+    dic = {}
+    if flag=="in":
         return HttpResponseRedirect("index")
-    dic={}
-    initphoto="../static/img/loading.jpg"
+
+    initphoto="/static/img/loading.jpg"
     if request.method=="POST":
         file=request.FILES
         usr=request.POST
@@ -136,7 +160,6 @@ def  regist(request):
 
 
 def  loading(request):
-    global  flag,utemp,initusr,initimg
     t = True  #获取的密码是『请输入密码』的标记
     if request.method=="POST":
         r = request.POST
@@ -152,11 +175,15 @@ def  loading(request):
         #验证通过就到首页
         if obj.is_valid():
             data=obj.clean()
-            flag=1
             initimg=model.WebappUsr.objects.get(usr=u).img
-            utemp=u
-            initusr=utemp
-            return  HttpResponseRedirect("/index")
+            initusr=u
+            response=HttpResponseRedirect("index")
+            response.set_cookie("_flag","in")
+            response.set_cookie("_initimg",parse.quote(initimg))
+            response.set_cookie("_initusr",parse.quote(initusr))
+
+
+            return response
         else:
             flag=0
             if pw!="请输入密码":
@@ -177,9 +204,11 @@ def  loading(request):
 
 
 def quite(request):
-    global flag
-    flag=0
-    return  HttpResponseRedirect("/index")
+    response=HttpResponseRedirect("/index")
+    response.set_cookie("_flag","out")
+    response.set_cookie("_initusr","")
+    response.set_cookie("_initimg","")
+    return response
 
 """
 1、从数据库中查询数据显示到页面
@@ -189,12 +218,21 @@ def quite(request):
 
 @csrf_exempt
 def userInfo(request):
-
-    global  utemp,initimg,initusr
-    if flag==0:
-        return HttpResponseRedirect("loading")
     ob = "登录"
     rg = "注册"
+    flag=tool.chinese(request.COOKIES.get("_flag"))
+    initusr=tool.chinese(request.COOKIES.get("_initusr"))
+    # 第一次进入时是由于没有flag所以flag置为""
+    # 导致点击的头像可以进入这页面
+    if flag=="":
+        flag="out"
+    if flag=="out":
+        return HttpResponseRedirect("loading")
+    if flag == "in":
+        ob = "退出"
+        rg = "已登录"
+
+
     query=model.WebappUsr
     usr=""
     sex=""
@@ -204,11 +242,7 @@ def userInfo(request):
     phone=""
     loc=""
     img=""
-    # if flag==0:
-    #     return  HttpResponseRedirect("index")
-    if flag == 1:
-        ob = "退出"
-        rg = "已登录"
+
     if request.method=="POST":
         data=request.POST
         try:
@@ -216,16 +250,12 @@ def userInfo(request):
         except:
             print("没有文件上传")
         if data["flag"]=="up":
-            ob = model.WebappUsr.objects.get(usr=utemp)
-            ev=model.eval.objects.filter(p=utemp)
-
-
+            ob = model.WebappUsr.objects.get(usr=initusr)
             ob.img = "static/"+data["usr"]+"/"+file.name
-            initimg = "static/"+data["usr"]+"/"+file.name
             ob.save()
+
+            ev = model.eval.objects.filter(p=initusr)
             ev.update(img="static/" + data["usr"] + "/" + file.name)
-
-
 
             try:
                 shutil.rmtree("webapp/static/"+data["usr"])
@@ -236,11 +266,13 @@ def userInfo(request):
             with open("webapp/static/"+data["usr"]+"/"+file.name,"wb+") as f:
                 for i in file:
                     f.write(i)
-            return  HttpResponse("../static/"+data["usr"]+"/"+file.name)
+            response=HttpResponse("../static/"+data["usr"]+"/"+file.name)
+            response.set_cookie("_initimg",parse.quote("static/"+data["usr"]+"/"+file.name))
+            return response
 
         if  data["flag"]=="change":
-            ob = model.WebappUsr.objects.get(usr=utemp)
-            ev=model.eval.objects.filter(p=utemp)
+            ob = model.WebappUsr.objects.get(usr=initusr)
+            ev=model.eval.objects.filter(p=initusr)
             uform = form.uinfo(data)
             if uform.is_valid():
                 ob.usr=data["usr"]
@@ -252,16 +284,16 @@ def userInfo(request):
                 ob.loc=data["loc"]
                 ob.img="static/"+data["usr"]+"/"+ob.img.split("/")[-1]
                 ev.update(img=ob.img)
-                initusr=ob.usr
-                initimg=ob.img
                 try:
-                    shutil.move("webapp/static/"+utemp,"webapp/static/"+data["usr"])
+                    shutil.move("webapp/static/"+initusr,"webapp/static/"+data["usr"])
                 except:
                     print("第一次没有创建文件的所以不能更名")
-                utemp = data["usr"]
                 ob.save()
-                utemp = data["usr"]
-                return HttpResponse("temp")
+
+                response=HttpResponse("temp")
+                response.set_cookie("_initusr",parse.quote(ob.usr))
+                response.set_cookie("_initimg",parse.quote(ob.img))
+                return response
             else:
                 er={}
                 for i in uform.errors:
@@ -270,7 +302,7 @@ def userInfo(request):
 
 
     try:
-        query = query.objects.get(usr=utemp)
+        query = query.objects.get(usr=initusr)
         usr = query.usr
         sex = query.sex
         if int(sex)==0:
@@ -283,8 +315,6 @@ def userInfo(request):
         phone = query.phone
         loc = query.loc
         img=query.img
-
-        utemp = usr
     except:
         print("查询有错误")
     return  render(request,"pages/uinfo.html",
@@ -301,7 +331,17 @@ def userInfo(request):
                    })
 @csrf_exempt
 def timenewsdetail(request):
-    global title,name,initusr,initimg
+    initusr=tool.chinese(request.COOKIES.get("_initusr"))
+    initimg=tool.chinese(request.COOKIES.get("_initimg"))
+    name=tool.chinese(request.COOKIES.get("_name"))
+    title=tool.chinese(request.COOKIES.get("_title"))
+    flag=tool.chinese(request.COOKIES.get("_flag"))
+    if initusr=="":
+        initusr="姓名"
+    if initimg=="":
+        initimg="static/img/loading.jpg"
+
+
     img="#"
     good="无数据"
     bad="无数据"
@@ -311,13 +351,10 @@ def timenewsdetail(request):
     xinyong="无数据"
     ob="登录"
     rg = "注册"
-    if flag==1:
+    if flag=="in":
         ob="退出"
         rg = "已登录"
-    if request.method=="POST":
-        title=request.POST["title"].strip()
-        name=request.POST["name"].strip()
-        return  HttpResponse("timenewsdetail")
+
     try:
         newsmodel=model.WebappNews.objects.filter(usr=name,title=title)[0:1][0]
         umodel=model.WebappUsr.objects.get(usr=name)
@@ -332,6 +369,7 @@ def timenewsdetail(request):
         xinyong=float('%.2f' % ((good-bad)*100/(good+bad+1)))
     except:
         pass
+
     return  render(request, "pages/timenewsdetail.html",
                    {"ob":ob,
                      "rg":rg,
@@ -348,18 +386,35 @@ def timenewsdetail(request):
                     "initusr":initusr,
                    })
 
-fl=0
-local=0
-tag=0
+
 @csrf_exempt
 def newsList(request):
-    global initusr, initimg,fl,local,tag
+
+    initusr=tool.chinese(request.COOKIES.get("_initusr"))
+    initimg=tool.chinese(request.COOKIES.get("_initimg"))
+    flag=tool.chinese(request.COOKIES.get("_flag"))
+    fl = tool.chinese(request.COOKIES.get("_fl"))#由于flag判断登录
+    local=tool.chinese(request.COOKIES.get("_local"))
+    tag = tool.chinese(request.COOKIES.get("_tag"))
+    search=tool.chinese(request.COOKIES.get("_search"))
+    if initusr=="":
+        initusr="姓名"
+    if initimg=="":
+        initimg="static/img/loading.jpg"
     ob = "登录"
     rg = "注册"
     try:
-        all=model.WebappNews.objects.all().count()
+        #按照标签查询，如果查找不到，就全部安装地域查询
+        nes=model.WebappNews.objects.filter(loc=local,flag=fl)
+        all=nes.count()
+        if  all==0:
+            all=model.WebappNews.objects.filter(flag=fl).count()
         if all%60!=0:
             all=int(all/60)+1
+        if all==0:
+            all=1  #解决有的页面没有数，上面的查询导致all=0,的问题
+        print("all",all)
+        print(local)
 
     except:
         all=0
@@ -368,7 +423,7 @@ def newsList(request):
         ob = "登录"
         initimg = "../static/img/loading.jpg"
         initusr = "姓名"
-    if flag == 1:
+    if flag =="in":
         ob = "退出"
         rg = "已登录"
     if request.method=="POST":
@@ -378,17 +433,27 @@ def newsList(request):
             fl=request.POST["flag"]
             local=request.POST["local"]
             tag=request.POST["tag"]
-            return HttpResponse("newslist")
+            response=HttpResponse("newslist")
+            response.set_cookie("_fl",parse.quote(fl))
+            response.set_cookie("_local",parse.quote(local))
+            response.set_cookie("_tag",parse.quote(tag))
+            return response
         if fro=="indexbar":
             fl=request.POST["flag"]
             local=request.POST["local"]
             tag=request.POST["tag"]
-            return HttpResponse("newslist")
+            response = HttpResponse("newslist")
+            response.set_cookie("_fl", parse.quote(fl))
+            response.set_cookie("_local", parse.quote(local))
+            response.set_cookie("_tag", parse.quote(tag))
+            return response
 
         if fro=="newslist":
             count = int(request.POST["count"]) - 1
             ty = tool.query2(newsmodel, 60 * count, 60 * (1 + count), fl, local, tag).get()
-            return HttpResponse(json.dumps(ty))
+            response= HttpResponse(json.dumps(ty))
+            response.set_cookie("al",ty["all"])
+            return  response
 
     return render(request,"pages/newslist.html",
                   {"range":range(1,21),
@@ -403,81 +468,86 @@ def newsList(request):
 
 
 
-'''********************以下为有待替换的处理函数************'''
-title=""
-content=""
-loc=""
-flag2=""
 
 @csrf_exempt
 def newsbackstage(request):
-    global title,content,loc,flag2,flag,initimg,initusr
-    ob = "登录"
-    rg = "注册"
-    if flag == 0:
-       return HttpResponseRedirect("index")
-    if flag == 1:
-        ob = "退出"
-        rg = "已登录"
-    if request.method=="POST":
-        result=request.POST
-        if result["flag"]=="param":
-            title = result["title"]
-            news=model.WebappNews.objects.filter(title=title)[0:1]
-            content=news[0].content
-            loc=news[0].loc
-            flag2=news[0].flag
-    
-        if result["flag"]=="update" and not initusr=="姓名":
-           news=model.WebappNews.objects.filter(title=title)
-           news.update(
-            usr=model.WebappUsr.objects.get(usr=initusr),time=result["time"],
-            flag=result["select"],loc=result["group"],title=result["title"],
-            content=result["content"])
-           title =result["title"]
-           content=result["content"]
-        return HttpResponse("newsbackstage")
-    return  render(request,"pages/newsbackstage.html",{
-                 "title":title,"content":content,"loc":loc,
-                 "flag":flag2,"initusr":initusr,"initimg":initimg,
-                 "ob":ob,
-                 "rg":rg,
-                 "button":"修改"
-
-                                        })
-
-@csrf_exempt
-def newsbackstage2(request):
-    global flag,initimg,initusr
-    ob = "登录"
-    rg = "注册"
-    if flag == 0:
-        return HttpResponseRedirect("index")
-    if flag == 1:
-        ob = "退出"
-        rg = "已登录"
+    ob="登录"
+    rg="注册"
+    fla=tool.chinese(request.COOKIES.get("_flag"))
+    initusr=tool.chinese(request.COOKIES.get("_initusr"))
+    initimg=tool.chinese(request.COOKIES.get("_initimg"))
     title=""
+    tag =tool.chinese( request.COOKIES.get("_tag"))
     content=""
     loc=""
+    button="发布"
+    if fla=="in":
+        ob="退出"
+        rg="已注册"
+
     if request.method=="POST":
-        result = request.POST
-        if result["flag"]=="save" and not initusr=="姓名":
-                news=model.WebappNews(usr=model.WebappUsr.objects.get(usr=initusr),time=result["time"],
-                flag=result["select"],loc=result["group"],title=result["title"],content=result["content"])
-                news.save()
-                return HttpResponse("newsbackstage2")
-    return  render(request,"pages/newsbackstage.html",{
-                 "title":title,"content":content,"loc":loc,
-                 "flag":flag2,"initusr":initusr,"initimg":initimg,
-                 "ob":ob,
-                 "rg":rg,
-                 "button":"发布"
-                 })
+        rq=request.POST
+        if rq["flag"]=="save":  #从发布系统来的
+            time=rq["time"]
+            flag=rq["select"]
+            loc=rq["group"]
+            title=rq["title"]
+            content=rq["content"]
+            usr=model.WebappUsr.objects.get(usr=initusr)
+            news=model.WebappNews(title=title,
+                                  content=content,
+                                  time=time,
+                                  loc=loc,
+                                  flag=flag,
+                                  usr=usr)
+            news.save()
+            return  HttpResponse("newsbackstage")
+
+        if rq["flag"]=="update":  #从发布系统来的
+            time=rq["time"]
+            flag=rq["select"]
+            loc=rq["group"]
+            title=rq["title"]
+            content=rq["content"]
+            usr=model.WebappUsr.objects.get(usr=initusr)
+            news=model.WebappNews.objects.filter(usr=usr,title=title)
+            news.update(title=title,
+                        content=content,
+                        time=time,
+                        loc=loc,
+                        flag=flag,
+                        )
+            return  HttpResponse("ok")
+    if tag=="manager":
+        title=tool.chinese(request.COOKIES.get("_title"))
+        um=model.WebappUsr.objects.get(usr=initusr)
+        news=model.WebappNews.objects.filter(usr=um,title=title)
+        content=news[0].content
+        loc=news[0].loc
+        button="修改"
+    response=render(request,"pages/newsbackstage.html",
+                                                {
+                                                "ob":ob,
+                                                "rg":rg,
+                                                "title":title,
+                                                "content":content,
+                                                "loc":loc,
+                                                "initimg":initimg,
+                                                "initusr":initusr,
+                                                "button":button
+                                                })
+    #由于从管理界面进入后标记了_tag,如果不清除，导致从发布进入的页面
+    #就会进入if tag="manager"程序中;
+    response.set_cookie("_tag","")
+    return response
+
 
 
 @csrf_exempt
 def file(request):
-    global initusr
+    initusr=tool.chinese(request.COOKIES.get("_initusr"))
+    if initusr=="":
+        initusr="姓名"
     if request.method=="POST":
         try:
             file=request.FILES["file"]
@@ -488,20 +558,26 @@ def file(request):
         with open("webapp/static/" + initusr + "/" + file.name, "wb+") as f:
             for i in file:
                 f.write(i)
-    return  HttpResponse("static/"+initusr+"/"+file.name)
-
-
-
+    response=  HttpResponse("static/"+initusr+"/"+file.name)
+    response.set_cookie("_initimg","static/"+initusr+"/"+file.name)
+    return  response
 
 
 @csrf_exempt
 def info(request):
     ob="登录"
     rg = "注册"
-    if flag==1:
+    flag=tool.chinese(request.COOKIES.get("_flag"))
+    initimg=tool.chinese(request.COOKIES.get("_initimg"))
+    initusr=tool.chinese(request.COOKIES.get("_initusr"))
+    if initusr=="":
+        initusr="姓名"
+    if initimg=="":
+        initimg="static/img/loading.jpg"
+    if flag=="in":
         ob="退出"
         rg = "已登录"
-    if flag==0:
+    if flag=="out":
         return HttpResponseRedirect("loading")
     if request.method=="POST":
 
@@ -533,10 +609,6 @@ def info(request):
             title=request.POST["title"]
             news=model.WebappNews.objects.filter(title=title).delete()
             return HttpResponse("info")
-
-
-
-
     return  render(request,"pages/info.html",
                    {"ob":ob,
                      "rg":rg,
@@ -546,15 +618,13 @@ def info(request):
                    })
 
 
-title=0
-name=0
+
 @csrf_exempt
-
-
 def eval(request):
     ob="登录"
     rg = "注册"
-    if flag==1:
+    flag=tool.chinese(request.COOKIES.get("_flag"))
+    if flag=="in":
         ob="退出"
         rg = "已登录"
     if request.method=="POST":
@@ -626,17 +696,6 @@ def eval(request):
                    })
 
 
-def infodetail(request):
-    return render(request,"pages/infodetail.html")
-
-
-
-
-
-def t(request):
-    m=model.WebappNews.objects.filter(flag="3",loc="*")
-    print(m.count(),90000000)
-    return  HttpResponse("hao")
 
 
 

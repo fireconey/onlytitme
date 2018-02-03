@@ -36,6 +36,7 @@
 	width:10%;
 	border-radius:20px;
 	margin-top: 0.5%;
+	cursor: pointer;
 
 
 }
@@ -90,6 +91,7 @@
 	position: relative;
 	display: block;
 	background: green;
+	cursor: pointer;
 	height:18%;
 	color:#FFF;
 	/*color:blue;*/

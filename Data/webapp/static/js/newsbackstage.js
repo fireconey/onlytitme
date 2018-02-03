@@ -233,40 +233,18 @@ function submite()
 
   if(yes.innerText.replace(/\s+/g,"")=="发布") 
   {
-   yes.onclick=function()
-   { 
-     var settime=timeob.getEl(0).value*24*3600*1000
-     settime=settime+timeob.getEl(1).value*3600*1000
-     settime=settime+timeob.getEl(2).value*60*1000
-     var data=new Date()
-     settime=settime+data.getTime()
-
-
-     var index=selectob.options.selectedIndex
-     var  select=selectob.options[index].value
-     group=groupob.value
-
-     var  title=titleob.value.replace(/\s+/g,"")
-     var  content=contentob.innerHTML.replace(/\s{2,100}/g,"")
-     
-     $().ajax({
-      "type":"post",
-      "url":"newsbackstage2",
-      "data":{"time":settime,"select":select,
-      "group":group,"title":title,"content":content, 
-      "flag":"save"},
-      "fn":function(value)
-      { 
-        window.location.href=value.responseText
-      }
-    })
-
-   }
+     action("save")
   }
   if(yes.innerText.replace(/\s+/g,"")=="修改")
   {
+      action("update")
+  }
+
+
+  function action(acti)
+  {
     yes.onclick=function()
-   { 
+   {
      var settime=timeob.getEl(0).value*24*3600*1000
      settime=settime+timeob.getEl(1).value*3600*1000
      settime=settime+timeob.getEl(2).value*60*1000
@@ -286,14 +264,16 @@ function submite()
       "type":"post",
       "url":"newsbackstage",
       "data":{"time":settime,"select":select,
-      "group":group,"title":title,"content":content, "flag":"update"},
+      "group":group,"title":title,"content":content, "flag":acti},
       "fn":function(value)
-      { 
-        window.location.href=value.responseText
+      {
+          if(value.responseText=="newsbackstage")
+          {
+              window.location.href=value.responseText
+          }
       }
     })
 
    }
   }
- 
 }

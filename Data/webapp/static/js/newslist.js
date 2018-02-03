@@ -1,7 +1,7 @@
 window.onload=function(){
 	head()
 	initbody()
-	filldata()
+	setInterval(function(){filldata()},1000)
 	button()
 	showdetail()
 	changlabel()
@@ -23,8 +23,6 @@ function initbody(){
 	{
 		headimg.getEl(i).style.width=headimg.getEl(i).offsetHeight+"px"
 	}
-
-
 
 }
 count=1
@@ -72,7 +70,12 @@ function button(){
 		}
     }
     next.onclick=function(){
-		if (all.innerText.replace(/\s+/g, "") >=count+1 )
+
+		var num=all.innerText.trim()
+
+
+
+		if (num>=count+1 )
         {
 			count+=1
 			ipt.value=count
@@ -94,27 +97,24 @@ function button(){
 }
 
 function showdetail(){
-	var left=$(".clickbolck")
-	var name=$(".name")
-	var title=$(".data")
+	var clc=$(".clickbolck")
+	var nameob=$(".name")
+	var titleob=$(".data")
 	for(var i=0;i<60;i++)
 	{
-		(function (v0,v1,v2,v3) {
-			v0.getEl(v3).onclick=function(){
-				$().ajax({
-				"type":"post",
-				"url":"timenewsdetail",
-				"data":{"name":name.getEl(v3).innerText,
-					"title":title.getEl(v3).innerText},
-					"fn":function(value){
-					 window.location.href=value.responseText
-					},
-				"fn":function(value) {
-					window.location.href=value.responseText
-                }
-			})
+		(function (v) {
+			clc.getEl(v).onclick=function(){
+				var usr=nameob.getEl(v).innerText.trim()
+				var title=titleob.getEl(v).innerText.trim()
+				if(title=="无数据")
+				{  alert("无数据")
+					return  "temp"}
+				document.cookie="_name="+encodeURIComponent(usr)+";"
+				document.cookie="_title="+encodeURIComponent(title)+";"
+				window.location.href="timenewsdetail"
+
 			}
-        })(left,name,title,i)
+        })(i)
 	}
 }
 
@@ -125,16 +125,10 @@ function changlabel() {
 	var flag=$("#flag").getEl(0)
    changeyes.onclick=function()
    {
-   	$().ajax({
-		"type":"post",
-		"url":"newslist",
-		"data":{"local":changinput.value,"flag":flag.value},
-		"fn":function(value){
-			if(value.responseText!="none")
-			window.location.href=value.responseText
-			else alert("没有此分组")
-		}
-	})
+   	document.cookie="_local="+encodeURIComponent(changinput.value)
+    document.cookie="_tag="+encodeURIComponent("2")
+	   document.cookie="_search=yes" //用于标记点击了查询的按钮
+	window.location.href="newslist"
    }
 
 }

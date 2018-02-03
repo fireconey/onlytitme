@@ -205,16 +205,10 @@ function manager() {
                     title = titl.getEl(i).innerText.replace(/\s+/g,"").split("*》")[1]
                     if(typeof(title)!="undefined")
                     {
-                        $().ajax({
-                        "type": "post",
-                        "url": "newsbackstage",
-                        "data": {"title": title, "flag": "param"},
-                        "fn": function (value) {
-                            window.location.href = value.responseText
-                        }
-                    })
+                        document.cookie="_title="+encodeURIComponent(title)+";"
+                        document.cookie="_tag=manager" //由于区分进入后台的是哪个前端
+                        window.location.href="newsbackstage"
                     }
-
 
                 }
             }

@@ -189,6 +189,7 @@ function eval()
        var title=titleob.innerText.replace(/\s+/g,"")
         var li=""
         var ob=$("#othereva").getEl(0)
+        ob.innerText=""
         $().ajax({
             "type":"post",
             "url":"eval",
