@@ -265,7 +265,11 @@ def userInfo(request):
         if  data["flag"]=="change":
             ob = model.WebappUsr.objects.get(usr=initusr)
             ev=model.eval.objects.filter(p=initusr)
-            uform = form.uinfo(data)
+            print(data["sex"], "sex")
+            if initusr!=data["usr"]:
+                uform = form.uinfo(data)
+            else:uform=form.uinfo2(data)
+
             if uform.is_valid():
                 ob.usr=data["usr"]
                 ob.sex=data["sex"]
@@ -601,9 +605,10 @@ def info(request):
         if fla=="fill":
             count = int(request.POST["count"])
             title=[]
-            time=[]
-            news=model.WebappNews.objects.filter(usr=initusr)
+            utemp=model.WebappUsr.objects.get(usr=initusr)
+            news=model.WebappNews.objects.filter(usr=utemp)
             all=news.count()
+            print(all,"*********")
             n=0
             m=0
             if all%10!=0:

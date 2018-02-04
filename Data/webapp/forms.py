@@ -84,7 +84,9 @@ class Usr(forms.Form):
 def UsrInfoValidate(value):
 
     try:
-        flag=umodel.objects.get(usr=value)
+        flag=umodel.objects.filter(usr=value).count()
+        if not  flag==1:
+            flag=0
     except:
         flag=0
     if flag!=0:
@@ -95,6 +97,21 @@ class uinfo(forms.Form):
     img = forms.CharField(max_length=100)
     usr = forms.CharField(max_length=10,
                           validators=[UsrInfoValidate],
+                          error_messages={"required": "不能为空"})
+    passwd = forms.CharField(max_length=20,
+                             error_messages={"required": "不能为空"})
+
+    mw = ((0, u"男"),
+          (1, u"女"))
+    sex = forms.CharField(widget=forms.Select(choices=mw))
+    birth = forms.CharField(error_messages={"required": "不能为空"})
+    wx = forms.CharField(error_messages={"required": "不能为空"})
+    phone = forms.CharField(required=False)
+    loc = forms.CharField()
+ #如果名称没有修改就不要验证用户名
+class uinfo2(forms.Form):
+    img = forms.CharField(max_length=100)
+    usr = forms.CharField(max_length=10,
                           error_messages={"required": "不能为空"})
     passwd = forms.CharField(max_length=20,
                              error_messages={"required": "不能为空"})

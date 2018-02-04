@@ -170,7 +170,7 @@ function changedata(){
 	}
     var img=document.getElementById("photo")
 	var usr=document.getElementById("usr")
-	var sex=document.getElementById("sex")
+	var sexob=document.getElementById("sex")
 	var birth=document.getElementById("birth")
 	var passwd=document.getElementById("passwd")
 	var wx=document.getElementById("wx")
@@ -182,12 +182,14 @@ function changedata(){
 	    this.value=""
      }
 
-    if(sex.value.replace(/\s+/g,"")=="男")
-    {
-    	sex=0
-    }
-    else{sex=1}
+
     fosubmit.onclick=function(){
+		if(sexob.value.trim()=="男")
+    	{
+    		sex=0
+    	}
+    	else{sex=1}
+
 		if(usr.value.replace(/\s+/g,"")=="已有此用户"|"不能为空")
           {
             return "1"
@@ -215,7 +217,7 @@ function changedata(){
     	{   
     		var data=xl.responseText.replace(/\[|\]/g,"").replace(/\'/g,'"')
     		if (xl.responseText!=="temp")
-               {
+               {  alert(xl.responseText)
                   data=JSON.parse(data)
 				   for(var i in data)
 				   {
