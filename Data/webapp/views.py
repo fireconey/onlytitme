@@ -339,6 +339,8 @@ def timenewsdetail(request):
     name=tool.chinese(request.COOKIES.get("_name"))
     title=tool.chinese(request.COOKIES.get("_title"))
     flag=tool.chinese(request.COOKIES.get("_flag"))
+    fl=tool.chinese(request.COOKIES.get("_fl"))
+    print(flag,"flag")
     if initusr=="":
         initusr="姓名"
     if initimg=="":
@@ -362,7 +364,7 @@ def timenewsdetail(request):
         rg = "已登录"
 
     try:
-        newsmodel=model.WebappNews.objects.filter(usr=name,title=title)[0:1][0]
+        newsmodel=model.WebappNews.objects.filter(usr=name,title=title,flag=fl)[0:1][0]
         umodel=model.WebappUsr.objects.get(usr=name)
         evalmodel=model.eval.objects.filter(usr=umodel)
         perpri=model.personeval.objects.get(usr=umodel)
@@ -428,8 +430,10 @@ def newsList(request):
             all=model.WebappNews.objects.filter(flag=fl).count()
         if all%60!=0:
             all=int(all/60)+1
+        else:
+            all=all/60
         if all==0:
-            all=1  #解决有的页面没有数，上面的查询导致all=0,的问题
+            all=1  #解决有的页面没有东西，上面的查询导致all=0,的问题
 
 
     except:
@@ -466,7 +470,7 @@ def newsList(request):
 
         if fro=="newslist":
             count = int(request.POST["count"]) - 1
-            ty = tool.query2(newsmodel, 60 * count, 60 * (1 + count), fl, local, tag).get()
+            ty = tool.query2(newsmodel, 60 * count, 60 * (1 + count),fl,  local, tag).get()
             response= HttpResponse(json.dumps(ty))
             response.set_cookie("al",ty["all"])
             return  response

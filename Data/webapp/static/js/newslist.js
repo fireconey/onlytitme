@@ -1,7 +1,7 @@
 window.onload=function(){
 	head()
 	initbody()
-	setInterval(function(){filldata()},1000)
+	filldata()
 	button()
 	showdetail()
 	changlabel()
@@ -49,6 +49,7 @@ function filldata(){
 
 		}
 	})
+
 
 
 }
