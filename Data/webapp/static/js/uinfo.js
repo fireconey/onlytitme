@@ -122,7 +122,7 @@ function changephoto(){
 	var photo=document.getElementById("photo")
 	var headp=document.getElementById("headp")
 	var submit=document.getElementById("submit")
-	var usr=document.getElementById("usr")
+
 	if(window.XMLHttpRequest)
 	{
 		xl=new XMLHttpRequest()
@@ -146,7 +146,6 @@ function changephoto(){
 		var data=new FormData()
         data.append("img",photo.attributes["src"].value)
 		data.append("file",file)
-		data.append("usr",usr.value.replace(/\s+/,""))
 		data.append("flag","up")
 		xl.open("post","userInfo",true)
 		xl.send(data)

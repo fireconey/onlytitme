@@ -186,7 +186,6 @@ def  loading(request):
 
             return response
         else:
-            flag=0
             if pw!="请输入密码":
                 t=False
             else:
@@ -233,21 +232,7 @@ def userInfo(request):
         ob = "退出"
         rg = "已登录"
 
-
     query=model.WebappUsr
-    usr=""
-    sex=""
-    birth=""
-    passwd=""
-    wx=""
-    phone=""
-    loc=""
-    img=""
-    good=0
-    bad=0
-    xinyong=0
-
-
     if request.method=="POST":
         data=request.POST
         try:
@@ -255,32 +240,32 @@ def userInfo(request):
         except:
             print("没有文件上传")
         if data["flag"]=="up":
+            utemp=initusr.strip()
+
             ob = model.WebappUsr.objects.get(usr=initusr)
-            ob.img = "static/"+data["usr"]+"/"+file.name
+            ob.img = "static/"+utemp+"/"+file.name
             ob.save()
 
             ev = model.eval.objects.filter(p=initusr)
-            ev.update(img="static/" + data["usr"] + "/" + file.name)
+            ev.update(img="static/" + utemp + "/" + file.name)
 
             try:
-                shutil.rmtree("webapp/static/"+data["usr"]+"/")
+                shutil.rmtree("webapp/static/"+utemp+"/")
             except:
                 print("没有这个目录")
-            if not os.path.exists("webapp/static/"+data["usr"]):
-                os.mkdir("webapp/static/"+data["usr"])
-            with open("webapp/static/"+data["usr"]+"/"+file.name,"wb+") as f:
+            if not os.path.exists("webapp/static/"+utemp):
+                os.mkdir("webapp/static/"+utemp)
+            with open("webapp/static/"+utemp+"/"+file.name,"wb+") as f:
                 for i in file:
                     f.write(i)
-            response=HttpResponse("../static/"+data["usr"]+"/"+file.name)
-            response.set_cookie("_initimg",parse.quote("static/"+data["usr"]+"/"+file.name))
+            response=HttpResponse("../static/"+utemp+"/"+file.name)
+            response.set_cookie("_initimg",parse.quote("static/"+utemp+"/"+file.name))
             return response
 
         if  data["flag"]=="change":
             ob = model.WebappUsr.objects.get(usr=initusr)
             ev=model.eval.objects.filter(p=initusr)
-            priceev=model.personeval.objects.filter(usr=initusr)
-            news=model.WebappNews.objects.filter(usr=initusr)
-            uform = form.uinfo(data,)
+            uform = form.uinfo(data)
             if uform.is_valid():
                 ob.usr=data["usr"]
                 ob.sex=data["sex"]
@@ -290,17 +275,16 @@ def userInfo(request):
                 ob.phone=data["phone"]
                 ob.loc=data["loc"]
                 ob.img="static/"+data["usr"]+"/"+ob.img.split("/")[-1]
-                ob.save()
-                ev.update(img=ob.img,usr=model.WebappUsr.objects.get(usr=data["usr"]))
-                news.update(usr=model.WebappUsr.objects.get(usr=data["usr"]))
-                priceev.update(usr=model.WebappUsr.objects.get(usr=data["usr"]))
-
 
                 try:
                     shutil.move("webapp/static/"+initusr,"webapp/static/"+data["usr"])
                 except:
                     print("第一次没有创建文件的所以不能更名")
                 ob.save()
+                ev.update(p=data["usr"],img=ob.img)
+
+
+
 
                 response=HttpResponse("temp")
                 response.set_cookie("_initusr",parse.quote(ob.usr))
@@ -312,27 +296,24 @@ def userInfo(request):
                     er[i]=uform.errors[i]
                 return  HttpResponse(str(er))
 
+    query = query.objects.filter(usr=initusr)[0]
+    eval = model.personeval.objects.filter(usr=query)[0]
+    good=eval.goodperson
+    bad=eval.badperson
+    xinyong=float("%.2f" %((good-bad)*100/(good+bad+1)))
+    usr = query.usr
+    sex = query.sex
+    if int(sex)==0:
+        sex="男"
+    elif int(sex)==1:
+        sex="女"
+    birth = query.birth
+    passwd = query.passwd
+    wx = query.wx
+    phone = query.phone
+    loc = query.loc
+    img=query.img
 
-    try:
-        query = query.objects.filter(usr=initusr)[0]
-        eval=model.personeval.objects.filter(usr=initusr)[0]
-        good=eval.goodperson
-        bad=eval.badperson
-        xinyong=float("%.2f" %((good-bad)*100/(good+bad+1)))
-        usr = query.usr
-        sex = query.sex
-        if int(sex)==0:
-            sex="男"
-        elif int(sex)==1:
-            sex="女"
-        birth = query.birth
-        passwd = query.passwd
-        wx = query.wx
-        phone = query.phone
-        loc = query.loc
-        img=query.img
-    except:
-        print("查询有错误")
     return  render(request,"pages/uinfo.html",
                    {"ob":ob,
                      "rg":rg,

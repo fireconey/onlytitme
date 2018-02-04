@@ -82,7 +82,6 @@ class Usr(forms.Form):
 
 
 def UsrInfoValidate(value):
-    global  flag
 
     try:
         flag=umodel.objects.get(usr=value)
