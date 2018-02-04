@@ -86,6 +86,14 @@ def query2(model,n,m,fl,local,tag):
         ob=model.objects.order_by("-time")
         ob=ob.filter(flag=fl,loc=local)
     number=ob.count()
+    all=number%60
+    if not all==0:
+        all=int(number/60)+1
+    else:
+        all=number/60
+    if number==0:
+        all=1
+
     if m<number:
         for i in range(n,m):#由于第一个取，第二个不屈，现在是倒序所以要number，0都-1
             img.append(model2.WebappUsr.objects.get(usr=ob[i].usr.usr).img)
@@ -107,7 +115,7 @@ def query2(model,n,m,fl,local,tag):
     pack.set(title,"title")
     pack.set(content, "content")
     pack.set(usr, "usr")
-    pack.set(number,"all")
+    pack.set(all,"all")
     return pack
 
 

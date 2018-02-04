@@ -32,6 +32,7 @@ function filldata(){
 	var img=$(".headimg")
 	var nam=$(".name")
 	var content=$(".data")
+	var all=$("#all")
 	$().ajax({
 		"type":"post",
 		"url":"newslist",
@@ -40,6 +41,8 @@ function filldata(){
 		{
 			var v=value.responseText.replace(/\'/g,'"')
 			var json=JSON.parse(v)
+			all.innerText=json['all']
+
 			for(var i=0;i<60;i++)
 			{
 				img.getEl(i).setAttribute("src",json["img"][i])
