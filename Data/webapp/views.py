@@ -265,7 +265,6 @@ def userInfo(request):
         if  data["flag"]=="change":
             ob = model.WebappUsr.objects.get(usr=initusr)
             ev=model.eval.objects.filter(p=initusr)
-            print(data["sex"], "sex")
             if initusr!=data["usr"]:
                 uform = form.uinfo(data)
             else:uform=form.uinfo2(data)
@@ -365,8 +364,8 @@ def timenewsdetail(request):
     try:
         newsmodel=model.WebappNews.objects.filter(usr=name,title=title)[0:1][0]
         umodel=model.WebappUsr.objects.get(usr=name)
-        evalmodel=model.eval.objects.filter(usr=name)
-        perpri=model.personeval.objects.get(usr=name)
+        evalmodel=model.eval.objects.filter(usr=umodel)
+        perpri=model.personeval.objects.get(usr=umodel)
 
         goodperson=perpri.goodperson
         badperson=perpri.badperson
@@ -431,8 +430,7 @@ def newsList(request):
             all=int(all/60)+1
         if all==0:
             all=1  #解决有的页面没有数，上面的查询导致all=0,的问题
-        print("all",all)
-        print(local)
+
 
     except:
         all=0
@@ -524,13 +522,17 @@ def newsbackstage(request):
             return  HttpResponse("newsbackstage")
 
         if rq["flag"]=="update":  #从发布系统来的
+
             time=rq["time"]
             flag=rq["select"]
             loc=rq["group"]
             title=rq["title"]
+            odtitle=request.COOKIES.get("_title")
+
+
             content=rq["content"]
             usr=model.WebappUsr.objects.get(usr=initusr)
-            news=model.WebappNews.objects.filter(usr=usr,title=title)
+            news=model.WebappNews.objects.filter(usr=usr,title=odtitle)
             news.update(title=title,
                         content=content,
                         time=time,
@@ -608,7 +610,6 @@ def info(request):
             utemp=model.WebappUsr.objects.get(usr=initusr)
             news=model.WebappNews.objects.filter(usr=utemp)
             all=news.count()
-            print(all,"*********")
             n=0
             m=0
             if all%10!=0:
