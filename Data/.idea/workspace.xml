@@ -83,11 +83,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="timenewsdetail.css" pinned="false" current-in-tab="true">
+      <file leaf-file-name="timenewsdetail.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/webapp/static/style/timenewsdetail.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="138" column="0" lean-forward="true" selection-start-line="138" selection-start-column="0" selection-end-line="138" selection-end-column="0" />
+            <state relative-caret-position="68">
+              <caret line="128" column="15" lean-forward="true" selection-start-line="128" selection-start-column="15" selection-end-line="128" selection-end-column="15" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="timenewsdetail.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/webapp/static/js/timenewsdetail.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="254">
+              <caret line="283" column="9" lean-forward="true" selection-start-line="283" selection-start-column="9" selection-end-line="283" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -192,7 +202,6 @@
         <option value="$PROJECT_DIR$/webapp/models.py" />
         <option value="$PROJECT_DIR$/webapp/templates/pages/timenewsdetail.html" />
         <option value="$PROJECT_DIR$/Data/urls.py" />
-        <option value="$PROJECT_DIR$/webapp/static/js/timenewsdetail.js" />
         <option value="$PROJECT_DIR$/webapp/static/style/style.css" />
         <option value="$PROJECT_DIR$/webapp/templates/pages/uinfo.html" />
         <option value="$PROJECT_DIR$/webapp/static/js/newsbackstage.js" />
@@ -202,6 +211,7 @@
         <option value="$PROJECT_DIR$/webapp/views.py" />
         <option value="$PROJECT_DIR$/webapp/static/js/uinfo.js" />
         <option value="$PROJECT_DIR$/webapp/static/style/timenewsdetail.css" />
+        <option value="$PROJECT_DIR$/webapp/static/js/timenewsdetail.js" />
       </list>
     </option>
   </component>
@@ -212,8 +222,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="422" />
-    <option name="y" value="37" />
+    <option name="x" value="230" />
+    <option name="y" value="38" />
     <option name="width" value="1160" />
     <option name="height" value="762" />
   </component>
@@ -390,7 +400,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="422" y="37" width="1160" height="762" extended-state="0" />
+    <frame x="230" y="38" width="1160" height="762" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32901135" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -600,7 +610,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/webapp/static/js/timenewsdetail.js" />
     <entry file="file://$PROJECT_DIR$/webapp/static/1/12-03-03-u=4176311916,303655432.JPEG" />
     <entry file="file://$PROJECT_DIR$/webapp/static/style/style.css">
       <provider selected="true" editor-type-id="text-editor">
@@ -726,8 +735,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/webapp/static/style/timenewsdetail.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="138" column="0" lean-forward="true" selection-start-line="138" selection-start-column="0" selection-end-line="138" selection-end-column="0" />
+        <state relative-caret-position="68">
+          <caret line="128" column="15" lean-forward="true" selection-start-line="128" selection-start-column="15" selection-end-line="128" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webapp/static/js/timenewsdetail.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="254">
+          <caret line="283" column="9" lean-forward="true" selection-start-line="283" selection-start-column="9" selection-end-line="283" selection-end-column="9" />
           <folding />
         </state>
       </provider>

@@ -284,7 +284,8 @@ function evaledit()
         }
 
        
-        
+        ob.css("display:none")
+        ob1.css("display:block")
     }
 
 }
