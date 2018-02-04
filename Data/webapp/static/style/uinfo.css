@@ -230,3 +230,19 @@ position: absolute;
 	/*border:1px solid rgba(192,192,192,1);*/
 	box-shadow: 5px 5px 3px #8F8F8F;
 }
+
+#footer div
+{   
+	padding-top:0.5%; 
+	text-align: center;
+	margin:auto;
+	/*background: red;*/
+}
+#footer .wximg{
+	margin-top:1%;
+	height:60%; 
+}
+.wximg img{
+	width:15%;
+	height:100%;  
+}

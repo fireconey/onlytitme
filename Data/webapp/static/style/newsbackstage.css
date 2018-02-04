@@ -50,13 +50,12 @@ body{
 	text-align: center;
 }
 #edite #loc{
-	padding-top: 0.4%;
 	position: absolute;
 	left:51%;
 	top: 10%;
 	background:green;
 	margin:auto;
-	height: 10%;
+	height: 11%;
 	width:49%;
 	height:30%; 
 }
@@ -68,6 +67,7 @@ body{
 	width:20%;
 	height:90%;
 	margin-left:1%;
+	margin-top: 0.4%;
 	border-style: none;
 	/*border-bottom: 1.5px dashed green;*/
 	border-radius:0;

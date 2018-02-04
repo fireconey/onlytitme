@@ -201,3 +201,18 @@ body {
 #footer {
     height: 9.92555%;
 }
+#footer div
+{   
+    padding-top:0.5%; 
+    text-align: center;
+    margin:auto;
+    /*background: red;*/
+}
+#footer .wximg{
+    margin-top:1%;
+    height:60%; 
+}
+.wximg img{
+    width:15%;
+    height:100%;  
+}
