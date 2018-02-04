@@ -614,17 +614,24 @@ def info(request):
             utemp=model.WebappUsr.objects.get(usr=initusr)
             news=model.WebappNews.objects.filter(usr=utemp)
             all=news.count()
-            n=0
-            m=0
-            if all%10!=0:
-                all=(int(all/10)+1)*10
-                n=all-count*10
-                m = all - (count - 1) * 10
-            if n<0 or m<0:
+            n=all-count*10
+            m =all - (count - 1) * 10
+            if not all%10==0:
+                all=int(all/10)+1
+            if all==0:
+                all=1
+            if all%10==0:
+                all=all/10
+
+
+            if n<0:
+                n=0
+            if m<0:
                 n=0
                 m=0
             news=news[n:m]
-            for i in range(0,news.count()):
+            rt=news.count()
+            for i in range(0,rt):
                 title.append(news[i].title)
                 # time.append(news[i].time)
             return  HttpResponse(str({"title":title,"all":all}))

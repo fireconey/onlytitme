@@ -6,6 +6,7 @@ window.onload = function () {
     showparper()
     delet()
     manager()
+    prenext()
 
 }
 
@@ -106,6 +107,7 @@ function bar() {
 all=1
 function filldata(count) {
     var span = $("#items ul li span")
+     var page=$("#pbox .pg")
     $().ajax({
         "type": "post",
         "url": "info",
@@ -114,7 +116,9 @@ function filldata(count) {
             var v = value.responseText.replace(/\'/g, '"')
             var json = JSON.parse(v)
             len = json["title"].length
-            all=json["all"]
+            all=json["all"]//以便下一页后一页用
+            page.getEl(0).innerText="第"+count+"页"
+            page.getEl(1).innerText="共"+all+"页"
             //解决数据删除后，数据库修改了，原来的
             //位置数据没有刷新的问题。
             for (var i = 0; i < 10; i++)
@@ -184,6 +188,7 @@ function delet() {
                         "fn": function (value) {
                             filldata(count)
                             content.getEl(0).innerText = ""
+
                         }
                     })
 
@@ -213,6 +218,29 @@ function manager() {
                 }
             }
         )(i)
+    }
+
+}
+
+function prenext()
+{
+    var ob=$("#pages a")
+    ob.getEl(0).onclick=function()
+    {
+       if(count>1&count<all+1)
+       {
+            count=count-1
+           filldata(count)
+
+       }
+    }
+    ob.getEl(1).onclick=function()
+    {
+        if(count>0&count<all)
+       {
+           count=count+1
+           filldata(count)
+       }
     }
 
 }

@@ -158,21 +158,34 @@ body{
 
 }
 
-#content #pages a{
+ #pages a{
 	width: 30%;
 	font-size: 1.3em;
 	text-decoration: none;
 	display: block;
-	margin-left:14%;
+	margin-left:1%;
 	margin-top:2%;
 	float:left;
 	color:#fff;
 
-	
+}
+#pages  #pbox
+{
+	width:35% ;
+	height: 100%;
+    float:left;
+	background: #CCC;
 
 }
-
-
+#pbox .pg{
+	color:blue;
+	width: 50%;
+    height: 100%;
+	float:left;
+	padding-top:10%;
+	font-size: 1.2em;
+	text-align: center;
+}
 
 
 #footer{
