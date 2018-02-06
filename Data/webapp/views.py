@@ -37,10 +37,11 @@ threadnumber=1
 # flag2=""
 # title=0
 # name=0
-
+alltime=0
 def timedele():
-    global iny,threadnumber
+    global iny,threadnumber,alltime
     tim=time.time()*1000
+    alltime=tim
     tyu=model.WebappNews.objects.exclude(time__gte=tim)
     all=tyu.count()
     try:
@@ -402,7 +403,8 @@ def timenewsdetail(request):
                     "initusr":initusr,
                     "goodperson":goodperson,
                     "badperson":badperson,
-                    "personxy":personxy
+                    "personxy":personxy,
+
                    })
 
 
@@ -493,6 +495,7 @@ def newsList(request):
 """
 @csrf_exempt
 def newsbackstage(request):
+    global  alltime
     ob="登录"
     rg="注册"
     fla=tool.chinese(request.COOKIES.get("_flag"))
@@ -502,6 +505,9 @@ def newsbackstage(request):
     tag =tool.chinese( request.COOKIES.get("_tag"))
     content=""
     loc=""
+    day=1
+    h=1
+    m=1
     button="发布"
     if fla=="in":
         ob="退出"
@@ -510,7 +516,7 @@ def newsbackstage(request):
     if request.method=="POST":
         rq=request.POST
         if rq["flag"]=="save":  #从发布系统来的
-            time=rq["time"]
+            tim=rq["time"]
             flag=rq["select"]
             loc=rq["group"]
             title=rq["title"]
@@ -518,7 +524,7 @@ def newsbackstage(request):
             usr=model.WebappUsr.objects.get(usr=initusr)
             news=model.WebappNews(title=title,
                                   content=content,
-                                  time=time,
+                                  time=tim,
                                   loc=loc,
                                   flag=flag,
                                   usr=usr)
@@ -527,7 +533,7 @@ def newsbackstage(request):
 
         if rq["flag"]=="update":  #从发布系统来的
 
-            time=rq["time"]
+            tim=rq["time"]
             flag=rq["select"]
             loc=rq["group"]
             title=rq["title"]
@@ -539,10 +545,12 @@ def newsbackstage(request):
             news=model.WebappNews.objects.filter(usr=usr,title=odtitle)
             news.update(title=title,
                         content=content,
-                        time=time,
+                        time=tim,
                         loc=loc,
                         flag=flag,
                         )
+            response=HttpResponse("0k")
+            response.set_cookie("_title",parse.quote(title))
             return  HttpResponse("ok")
     if tag=="manager":
         title=tool.chinese(request.COOKIES.get("_title"))
@@ -550,7 +558,13 @@ def newsbackstage(request):
         news=model.WebappNews.objects.filter(usr=um,title=title)
         content=news[0].content
         loc=news[0].loc
+        timetemp=int(news[0].time)-int(time.time()*1000)
+        day=int(timetemp/(24*3600*1000))
+        h=int((timetemp%(24*3600*1000))/(3600*1000))
+        m=int((timetemp%(24*3600*1000))%(3600*1000)/(60*1000))
+        print(m)
         button="修改"
+
     response=render(request,"pages/newsbackstage.html",
                                                 {
                                                 "ob":ob,
@@ -560,7 +574,11 @@ def newsbackstage(request):
                                                 "loc":loc,
                                                 "initimg":initimg,
                                                 "initusr":initusr,
-                                                "button":button
+                                                "button":button,
+                                                    "day":day,
+                                                    "h":h,
+                                                    "m":m,
+
                                                 })
     #由于从管理界面进入后标记了_tag,如果不清除，导致从发布进入的页面
     #就会进入if tag="manager"程序中;
