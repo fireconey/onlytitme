@@ -238,8 +238,8 @@ function evaledit()
     var ob=$("#toeval")
     var ob1=$("#othereva")
     var actionob=$(".action")
-    var name=$("#usrname").getEl(0).innerText.trim()
-    var usr=$("#usr").getEl(0).innerText.trim()
+    var name0=$("#usr").getEl(0).innerText.trim()
+    var usr=$(".usrname").getEl(0).innerText.trim()
     
     actionob.getEl(1).onclick=function()
     {
@@ -248,7 +248,7 @@ function evaledit()
     }
     actionob.getEl(0).onclick=function()
     {
-        if(name==usr)
+        if(name0==usr)
         {
             alert("不能自己给自己评论!")
             return
