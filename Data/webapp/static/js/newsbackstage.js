@@ -166,7 +166,7 @@ function bar() {
   	$().ajax({
   		"type":"post",
   		"url":"file",
-  		"data":{"file":t},
+  		"data":{"file":t,"from":"newsbackstage"},
   		"fn":function(value)
   		{  
         $("#content").getEl(0).focus()
@@ -256,7 +256,6 @@ function submite()
      settime=settime+timeob.getEl(2).value*60*1000
      var data=new Date()
      settime=settime+data.getTime()
-
 
      var index=selectob.options.selectedIndex
      var  select=selectob.options[index].value

@@ -12,6 +12,7 @@ import  webapp.tool as tool
 import threading
 import  time
 import json
+import re
 
 
 
@@ -63,7 +64,6 @@ def index(request):
     global  threadnumber
     ob = "登录"
     rg = "注册"
-
     if threadnumber==1:
         timer = threading.Timer(2, timedele)
         timer.start()
@@ -133,6 +133,10 @@ def  regist(request):
                             loc=data["loc"],
                             img=initphoto
                             ).save()
+            model.personeval(goodperson=0,
+                             badperson=0,
+                             usr=model.WebappUsr.objects.get(usr=data["usr"])
+                             ).save()
 
             return  HttpResponse("temp")
         elif usr["flag"]=="submit":
@@ -141,18 +145,18 @@ def  regist(request):
             return HttpResponse(str(dic))
 
         if onlyu.is_valid() and usr["flag"]=="im":
-            if not os.path.exists("webapp/static/"+usr["usr"]):
-                os.mkdir("webapp/static/"+usr["usr"])
-            with open("webapp/static/"+usr["usr"]+"/"+file["file"].name,"wb+") as f:
+            if not os.path.exists("webapp/static/usrimg/"+usr["usr"]):
+                os.mkdir("webapp/static/usrimg/"+usr["usr"])
+            with open("webapp/static/usrimg/"+usr["usr"]+"/"+file["file"].name,"wb+") as f:
                 for i in file["file"]:
                     f.write(i)
-            return HttpResponse("static/"+usr["usr"]+"/"+file["file"].name)
+            return HttpResponse("static/usrimg/"+usr["usr"]+"/"+file["file"].name)
         elif usr["flag"]=="im":
             for i in onlyu.errors:
                 dic[i]=onlyu.errors.get(i)
             return  HttpResponse(str(dic))
         elif usr["flag"]=="cancel":
-            shutil.rmtree("webapp/static/" + usr["ucancel"])
+            shutil.rmtree("webapp/static/usrimg/" + usr["ucancel"])
             return HttpResponse("ok")
 
     else:
@@ -183,8 +187,6 @@ def  loading(request):
             response.set_cookie("_flag","in")
             response.set_cookie("_initimg",parse.quote(initimg))
             response.set_cookie("_initusr",parse.quote(initusr))
-
-
             return response
         else:
             if pw!="请输入密码":
@@ -244,23 +246,23 @@ def userInfo(request):
             utemp=initusr.strip()
 
             ob = model.WebappUsr.objects.get(usr=initusr)
-            ob.img = "static/"+utemp+"/"+file.name
+            ob.img = "static/usrimg/"+utemp+"/"+file.name
             ob.save()
 
             ev = model.eval.objects.filter(p=initusr)
-            ev.update(img="static/" + utemp + "/" + file.name)
+            ev.update(img="static/usrimg/" + utemp + "/" + file.name)
 
             try:
-                shutil.rmtree("webapp/static/"+utemp+"/")
+                shutil.rmtree("webapp/static/usrimg/"+utemp+"/")
             except:
                 print("没有这个目录")
-            if not os.path.exists("webapp/static/"+utemp):
-                os.mkdir("webapp/static/"+utemp)
-            with open("webapp/static/"+utemp+"/"+file.name,"wb+") as f:
+            if not os.path.exists("webapp/static/usrimg/"+utemp):
+                os.mkdir("webapp/static/usrimg/"+utemp)
+            with open("webapp/static/usrimg/"+utemp+"/"+file.name,"wb+") as f:
                 for i in file:
                     f.write(i)
-            response=HttpResponse("../static/"+utemp+"/"+file.name)
-            response.set_cookie("_initimg",parse.quote("static/"+utemp+"/"+file.name))
+            response=HttpResponse("../static/usrimg/"+utemp+"/"+file.name)
+            response.set_cookie("_initimg",parse.quote("static/usrimg/"+utemp+"/"+file.name))
             return response
 
         if  data["flag"]=="change":
@@ -278,12 +280,23 @@ def userInfo(request):
                 ob.wx=data["wx"]
                 ob.phone=data["phone"]
                 ob.loc=data["loc"]
-                ob.img="static/"+data["usr"]+"/"+ob.img.split("/")[-1]
+                ob.img="static/usrimg/"+data["usr"]+"/"+ob.img.split("/")[-1]
 
                 try:
-                    shutil.move("webapp/static/"+initusr,"webapp/static/"+data["usr"])
+                    shutil.move("webapp/static/usrimg/"+initusr,"webapp/static/usrimg/"+data["usr"])
+                    shutil.move("webapp/static/usrimg/news/"+initusr,"webapp/static/usrimg/news/"+data["usr"])
+
                 except:
                     print("第一次没有创建文件的所以不能更名")
+                content1= model.WebappNews.objects.filter(usr=model.WebappUsr.objects.get(usr=initusr))
+                all=content1.count()
+                print("****",data["usr"])
+                for i in range(0,all):
+                    tempcontent = re.sub(r"static/usrimg/news/"+initusr, "static/usrimg/news/" + data["usr"], content1[i].content)
+                    tn=model.WebappNews.objects.get(content=content1[i].content)
+                    tn.content=tempcontent
+                    tn.save()
+                    print(content1[i].content)
                 ob.save()
                 ev.update(p=data["usr"],img=ob.img)
 
@@ -299,14 +312,16 @@ def userInfo(request):
                 for i in uform.errors:
                     er[i]=uform.errors[i]
                 return  HttpResponse(str(er))
-
     query = query.objects.filter(usr=initusr)[0]
+    usr = query.usr
+    sex = query.sex
+
+
     eval = model.personeval.objects.filter(usr=query)[0]
     good=eval.goodperson
     bad=eval.badperson
     xinyong=float("%.2f" %((good-bad)*100/(good+bad+1)))
-    usr = query.usr
-    sex = query.sex
+
     if int(sex)==0:
         sex="男"
     elif int(sex)==1:
@@ -365,7 +380,7 @@ def timenewsdetail(request):
         rg = "已登录"
 
     try:
-        newsmodel=model.WebappNews.objects.filter(usr=name,title=title,flag=fl)[0:1][0]
+        newsmodel=model.WebappNews.objects.filter(usr=model.WebappUsr.objects.get(usr=name),title=title,flag=fl)[0:1][0]
         umodel=model.WebappUsr.objects.get(usr=name)
         evalmodel=model.eval.objects.filter(usr=umodel)
         perpri=model.personeval.objects.get(usr=umodel)
@@ -590,20 +605,31 @@ def newsbackstage(request):
 @csrf_exempt
 def file(request):
     initusr=tool.chinese(request.COOKIES.get("_initusr"))
+    tag=""
     if initusr=="":
         initusr="姓名"
     if request.method=="POST":
         try:
             file=request.FILES["file"]
+            tag=request.POST["from"]
         except:
             return HttpResponse("falise")
-        if not os.path.exists("webapp/static/" +initusr) and initusr!="姓名":
-            os.mkdir("webapp/static/" +initusr)
-        with open("webapp/static/" + initusr + "/" + file.name, "wb+") as f:
-            for i in file:
-                f.write(i)
-    response=  HttpResponse("static/"+initusr+"/"+file.name)
-    response.set_cookie("_initimg","static/"+initusr+"/"+file.name)
+        if tag=="newsbackstage":
+            if not os.path.exists("webapp/static/usrimg/news/"+initusr) and initusr != "姓名":
+                os.mkdir("webapp/static/usrimg/news/" + initusr)
+            with open("webapp/static/usrimg/news/" + initusr +"/"+file.name, "wb+") as f:
+                for i in file:
+                    f.write(i)
+            response = HttpResponse("static/usrimg/news/" + initusr + "/" + file.name)
+        else:
+            if not os.path.exists("webapp/static/usrimg/" +initusr) and initusr!="姓名":
+                os.mkdir("webapp/static/usrimg/" +initusr)
+            with open("webapp/static/usrimg/" + initusr + "/" + file.name, "wb+") as f:
+                for i in file:
+                    f.write(i)
+            response=  HttpResponse("static/usrimg/"+initusr+"/"+file.name)
+    if not tag=="newsbackstage":
+        response.set_cookie("_initimg","static/usrimg/"+initusr+"/"+file.name)
     return  response
 
 

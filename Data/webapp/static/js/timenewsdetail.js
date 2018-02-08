@@ -271,7 +271,6 @@ function evaledit()
         var img=$("#headp").getEl(0).src
         var name=$("#usr").getEl(0).innerText.replace(/\s+/g,"")
         var content=$("#text").getEl(0).value
-        
        
         if(p=="姓名")
         {
