@@ -162,6 +162,16 @@ function bar() {
   }
   ob.getEl(9).onclick=function()
   {
+      var title=$("#title").getEl(0)
+      if(title.value=="")
+      {
+          alert("没有标题!\n请先输入标题")
+          ob.getEl(9,"$").css("display:none")
+          ob.getEl(8,"$").css("display:block")
+          return
+      }
+      document.cookie="_title="+title.value
+
   	var t=$("#file").getEl(0).files[0]
   	$().ajax({
   		"type":"post",

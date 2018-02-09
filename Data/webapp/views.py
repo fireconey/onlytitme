@@ -46,10 +46,14 @@ def timedele():
     tyu=model.WebappNews.objects.exclude(time__gte=tim)
     all=tyu.count()
     try:
-        tyu.delete()
+
         for i in range(0,all):
             nes=model.eval.objects.filter(usr=tyu[i].usr,title=tyu[i].title)
             nes.delete()
+            path="webapp/static/usrimg/news/"+tyu[i].usr+"/"+tyu[i].title
+            shutil.rmtree(path)
+
+        tyu.delete()
 
     except:
         print("$$$$","异常")
@@ -615,12 +619,14 @@ def file(request):
         except:
             return HttpResponse("falise")
         if tag=="newsbackstage":
-            if not os.path.exists("webapp/static/usrimg/news/"+initusr) and initusr != "姓名":
-                os.mkdir("webapp/static/usrimg/news/" + initusr)
-            with open("webapp/static/usrimg/news/" + initusr +"/"+file.name, "wb+") as f:
+            title=tool.chinese(request.COOKIES.get("_title"))
+
+            if not os.path.exists("webapp/static/usrimg/news/"+initusr+"/"+title) and initusr != "姓名":
+                os.mkdir("webapp/static/usrimg/news/" + initusr+"/"+title)
+            with open("webapp/static/usrimg/news/" + initusr +"/"+title+"/"+file.name, "wb+") as f:
                 for i in file:
                     f.write(i)
-            response = HttpResponse("static/usrimg/news/" + initusr + "/" + file.name)
+            response = HttpResponse("static/usrimg/news/" + initusr + "/" +title+"/"+ file.name)
         else:
             if not os.path.exists("webapp/static/usrimg/" +initusr) and initusr!="姓名":
                 os.mkdir("webapp/static/usrimg/" +initusr)
@@ -684,7 +690,11 @@ def info(request):
             return  HttpResponse(news[0].content)
         if fla=="delet":
             title=request.POST["title"]
-            news=model.WebappNews.objects.filter(title=title).delete()
+            news=model.WebappNews.objects.filter(title=title)
+            all=news.count()
+            for i in range(0,all):
+                shutil.rmtree("webapp/static/usrimg/news/"+initusr+"/"+news[i].title)
+            news.delete()
             return HttpResponse("info")
     return  render(request,"pages/info.html",
                    {"ob":ob,
